@@ -1,3 +1,7 @@
 # PONG
 Pair Project
-Test
+
+This is the pair project for Tausif and Jack. We hope you enjoy it!
+
+Proposal:
+For our pair project, we will be creating a loving tribute of the classic arcade game PONG. PONG is a game that is played between a human and a computer. When the game starts, a ball will move between the two paddles on the left and right sides of the screen, which the human and computer will control, respectively. As the game goes on, the ball will move at faster and faster speeds, making it more difficult to deflect with the paddle. If the ball gets past one player’s paddle, the other player will be awarded with a point and play will resume with the ball being served to the player that failed to deflect the ball. When one player achieves a predetermined number of points, they win the game. Initially, the user will interact with the program through a menu. Upon the system starting up, the user will be presented with a button that they will use to begin the game when they are ready. When the game begins, the user will control his or her paddle using two different buttons on the keyboard: one for moving the paddle up, and one for moving the paddle down. When a point is scored by either player, the ball will remain in place at the center of the play area until the user signals the start of the next rally by pressing a third unique button. Upon the end of a set, the winner will be announced and the user will be presented with the option to return to the main menu and either start another game or exit the application.
