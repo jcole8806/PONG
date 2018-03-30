@@ -1,37 +1,41 @@
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainMenu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	private JButton[] options = new JButton[3];
+	private String[] optionTexts = {"Start Game", "Options", "Instructions"};
 	
 	public MainMenu() {
-		setLayout(null);
-		setBackground(Color.WHITE);
+		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
 		
-		JLabel title = new JLabel("PONG");
-		JButton start = new JButton("Start Game");
-		start.addActionListener(this);
-		start.setActionCommand(start.getText());
-		
-		title.setSize(400, 400);
-		title.setLocation((int)Pong.screenSize.width/2 - title.getWidth()/2, 0);
-		title.setFont(new Font("Arail", 1, 100));
-		title.setHorizontalAlignment(JLabel.CENTER);
-		add(title);
+		for(int i = 0; i < options.length; i++) {
+			options[i] = new JButton(optionTexts[i]);
+			options[i].setActionCommand(options[i].getText());
+			options[i].addActionListener(this);
+			add(options[i]);
+		}
+	}
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setColor(Color.WHITE);
+		g.drawString("PONG", Pong.screenSize.width/2, Pong.screenSize.height/10);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Start Game")) {
-			Pong.pongFrame.add(new MainGame());
-			Pong.pongFrame.remove(0);
+			Pong.pongFrame.setContentPane(new MainGame());
+		} else if(e.getActionCommand().equals("Options")) {
+			Pong.pongFrame.setContentPane(new OptionsMenu());
+		} else if(e.getActionCommand().equals("Instructions")) {
+			Pong.pongFrame.setContentPane(new Instruction());
 		}
 			
 	}

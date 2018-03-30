@@ -15,7 +15,7 @@ public class Pong{
 		pongFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		pongFrame.setVisible(true);
 		pongFrame.setResizable(false);
-		pongFrame.add(new MainMenu());
+		pongFrame.setContentPane(new MainMenu());
 	}
 	
 	public static void main(String[] args) {
