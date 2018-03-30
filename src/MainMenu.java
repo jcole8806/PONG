@@ -1,4 +1,12 @@
+/*
+ * 	Things that need to be done (add or delete tasks as needed):
+ * 		Place buttons elsewhere (preferably in a column near center of screen)
+ * 		 - Could be done somehow using setLayout(null)
+ *		Make title centered
+ */
+
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,8 +16,8 @@ import javax.swing.JPanel;
 
 public class MainMenu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JButton[] options = new JButton[3];
-	private String[] optionTexts = {"Start Game", "Options", "Instructions"};
+	private String[] optionTexts = {"Start Game", "Options", "Instructions", "Exit Game"};
+	private JButton[] options = new JButton[optionTexts.length];
 	
 	public MainMenu() {
 		setBackground(Color.BLACK);
@@ -26,6 +34,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Comic Sans", 1, 100));
 		g.drawString("PONG", Pong.screenSize.width/2, Pong.screenSize.height/10);
 	}
 
@@ -36,6 +45,8 @@ public class MainMenu extends JPanel implements ActionListener {
 			Pong.pongFrame.setContentPane(new OptionsMenu());
 		} else if(e.getActionCommand().equals("Instructions")) {
 			Pong.pongFrame.setContentPane(new Instruction());
+		} else if(e.getActionCommand().equals("Exit Game")) {
+			System.exit(0);
 		}
 			
 	}

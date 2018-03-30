@@ -1,3 +1,8 @@
+/*
+ * 	Things that need to be done (add or delete tasks as needed):
+ * 		Start working on backdoor stuff
+ */
+
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
