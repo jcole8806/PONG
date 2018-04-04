@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -29,6 +30,10 @@ public class MainMenu extends JPanel implements ActionListener {
 			options[i].addActionListener(this);
 			add(options[i]);
 		}
+		//JPanel buttonPanel = new JPanel();
+		//buttonPanel.setBounds(0, 800, 800, 800);
+		
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
 	public void paint(Graphics g) {
