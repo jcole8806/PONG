@@ -12,7 +12,12 @@ public class Instruction extends JPanel implements ActionListener{
 	public Instruction() {
 		setBackground(Color.RED);
 		setSize(Pong.screenSize);
-		add(new JLabel("Instruction goes here"));
+		JLabel instructions = new JLabel("Instructions: Use the up and down arrow keys on the keyboard"
+				+ " to move your paddle. The objective of the game is to block the ball from passing off "
+				+ "the screen from your side, and instead trying to get the ball to pass off the screen"
+				+ "from the other side.");
+		
+		add(instructions);
 		JButton back = new JButton("Go Back");
 		back.addActionListener(this);
 		add(back);
