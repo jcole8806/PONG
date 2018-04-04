@@ -11,29 +11,33 @@ import javax.swing.*;
 
 public class PongTest {
 	
-	private static JFrame frame = new JFrame("Pong");
+	private static JFrame frame;
 	private static java.util.Timer t = new java.util.Timer();
 	
 	public PongTest() {
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		frame = new JFrame("PONG");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setContentPane(new GamePanel());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		new GamePanel();
 	}
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
+		//need to add second paddle, make variable for speed (both ball and paddle), etc.
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
+		private int direction = -1;
 
 		public GamePanel() {
 			setFocusable(true);
 			requestFocus();
 			addKeyListener(this);
+			setBackground(Color.BLACK);
+			setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 			paddle.setBounds(100, 100, 20, 100);
 			ball.setBounds(300, 300, 20, 20);
-			setBackground(Color.BLACK);
 			timer.start();
 		}
 		
@@ -45,9 +49,9 @@ public class PongTest {
 		}
 
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == 38 && paddle.y > 0)
+			if(e.getKeyCode() == 38 && paddle.y > 10)
 				paddle.setLocation(paddle.x, paddle.y - 5);
-			else if(e.getKeyCode() == 40 && paddle.y < 1037) 
+			else if(e.getKeyCode() == 40 && paddle.y < 1054) 
 				paddle.setLocation(paddle.x, paddle.y + 5);
 		}
 
@@ -60,7 +64,11 @@ public class PongTest {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			ball.setLocation(ball.x + 5, ball.y);
+			// need to check y, figure that out
+			if(ball.getLocation().x - (paddle.x + 20) <= 0)
+				direction *= -1;
+			
+			ball.setLocation(ball.x + 5*direction, ball.y);
 		}
 		
 	}
