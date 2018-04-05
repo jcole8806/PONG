@@ -24,12 +24,12 @@ public class PongTest {
 	}
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
-		//need to add second paddle, make variable for speed (both ball and paddle), etc.
+		//need to add second paddle
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYSpeed = 0, paddleSpeed = 5, i = 0;
-		private boolean moving = false, tangible = true;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+		private boolean paddleMoving = false, tangible = true;
 
 		public GamePanel() {
 			setFocusable(true);
@@ -47,20 +47,24 @@ public class PongTest {
 			g.setColor(Color.WHITE);
 			g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 			g.fillRect(ball.x, ball.y, ball.width, ball.height);
+			g.drawRect(10, 10, 1000, 755);
 		}
 		
 		private boolean hitPaddle() {
 			// fix this
 			if (ball.x < paddle.x + paddle.width - ballXSpeed)
 				tangible = false;
-			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible)
+			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
+				ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;
 				return true;
+			}
+				
 			return false;
 		}
 
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == 38 || e.getKeyCode() == 40) {
-				moving = true;
+				paddleMoving = true;
 				if(e.getKeyCode() == 38)
 					paddleDirection = -1;
 				else if(e.getKeyCode() == 40)
@@ -70,7 +74,7 @@ public class PongTest {
 
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode() == 38 || e.getKeyCode() == 40)
-				moving = false;
+				paddleMoving = false;
 		}
 
 		public void keyTyped(KeyEvent e) {
@@ -78,8 +82,7 @@ public class PongTest {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			// need to change vertical speed based on where on the ball the ball hits
-			if(moving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
+			if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
 				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
 			if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > 1000)
 				ballDirection *= -1;
@@ -87,8 +90,11 @@ public class PongTest {
 			i++;
 			if(i % 100 == 0 && ballXSpeed < 10)
 				ballXSpeed++;
+
+			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
 			
-			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y);
+			if(ball.y <= 10 || ball.y >= 755)
+				ballYVelocity*= -1;
 		}
 		
 	}
