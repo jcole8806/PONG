@@ -28,8 +28,8 @@ public class PongTest {
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int ballDirection = -1, paddleDirection, ballSpeed = 5, paddleSpeed = 5;
-		private boolean moving = false;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYSpeed = 0, paddleSpeed = 5, i = 0;
+		private boolean moving = false, tangible = true;
 
 		public GamePanel() {
 			setFocusable(true);
@@ -47,6 +47,15 @@ public class PongTest {
 			g.setColor(Color.WHITE);
 			g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 			g.fillRect(ball.x, ball.y, ball.width, ball.height);
+		}
+		
+		private boolean hitPaddle() {
+			// fix this
+			if (ball.x <= paddle.x + paddle.width)
+				tangible = false;
+			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible)
+				return true;
+			return false;
 		}
 
 		public void keyPressed(KeyEvent e) {
@@ -70,12 +79,17 @@ public class PongTest {
 
 		public void actionPerformed(ActionEvent e) {
 			// need to check y, figure that out
+			// need to change vertical speed based on where on the ball the ball hits
 			if(moving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
 				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
-			if(ball.getLocation().x - (paddle.x + 20) <= 0)
+			if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > 1000)
 				ballDirection *= -1;
 			
-			ball.setLocation(ball.x + ballSpeed*ballDirection, ball.y);
+			i++;
+			if(i % 100 == 0 && ballXSpeed <= 10)
+				ballXSpeed++;
+			
+			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y);
 		}
 		
 	}
