@@ -70,11 +70,8 @@ public class PongTest {
 
 		public void actionPerformed(ActionEvent e) {
 			// need to check y, figure that out
-			if(moving)
-				if(paddleDirection == -1 && paddle.y > 10)
-					paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
-				else if (paddleDirection == 1 && paddle.y < 755)
-					paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
+			if(moving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
+				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
 			if(ball.getLocation().x - (paddle.x + 20) <= 0)
 				ballDirection *= -1;
 			
