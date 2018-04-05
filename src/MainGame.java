@@ -40,7 +40,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if(e.getID() == )
+		//if(e.getKeyCode() == KeyEvent.){
+			
+		//}
 	}
 
 	public void keyReleased(KeyEvent e) {
