@@ -28,7 +28,7 @@ public class PongTest {
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0;
 		private boolean paddleMoving = false, tangible = true;
 
 		public GamePanel() {
@@ -51,7 +51,6 @@ public class PongTest {
 		}
 		
 		private boolean hitPaddle() {
-			// fix this
 			if (ball.x < paddle.x + paddle.width - ballXSpeed)
 				tangible = false;
 			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
@@ -69,7 +68,8 @@ public class PongTest {
 					paddleDirection = -1;
 				else if(e.getKeyCode() == 40)
 					paddleDirection = 1;
-			}	
+			}	else if(e.getKeyCode() == 32 && ballXSpeed == 0)
+					ballXSpeed++;
 		}
 
 		public void keyReleased(KeyEvent e) {
@@ -88,7 +88,7 @@ public class PongTest {
 				ballDirection *= -1;
 			
 			i++;
-			if(i % 100 == 0 && ballXSpeed < 10)
+			if(i % 100 == 0 && ballXSpeed < 10 && ballXSpeed > 0)
 				ballXSpeed++;
 
 			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
