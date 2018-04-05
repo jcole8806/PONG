@@ -1,10 +1,5 @@
-/*
- * 	Things that need to be done (add or delete tasks as needed):
- * 		Place buttons elsewhere (preferably in a column near center of screen)
- * 		 - Could be done somehow using setLayout(null)
- *		Make title centered
- */
-
+//TODO Arrange buttons in the center of screen (done using setLayout(null) and setBounds(x, y, width, height))
+//TODO Make buttons look nice
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

@@ -1,3 +1,5 @@
+//TODO make code more readable (break stuff up into methods)
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -90,7 +92,7 @@ public class PongTest {
 				ballDirection *= -1;
 			
 			i++;
-			if(i % 100 == 0 && ballXSpeed < 10 && ballXSpeed > 0)
+			if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
 				ballXSpeed++;
 
 			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
