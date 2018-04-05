@@ -51,7 +51,7 @@ public class PongTest {
 		
 		private boolean hitPaddle() {
 			// fix this
-			if (ball.x <= paddle.x + paddle.width)
+			if (ball.x < paddle.x + paddle.width - ballXSpeed)
 				tangible = false;
 			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible)
 				return true;
@@ -78,7 +78,6 @@ public class PongTest {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			// need to check y, figure that out
 			// need to change vertical speed based on where on the ball the ball hits
 			if(moving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
 				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
@@ -86,7 +85,7 @@ public class PongTest {
 				ballDirection *= -1;
 			
 			i++;
-			if(i % 100 == 0 && ballXSpeed <= 10)
+			if(i % 100 == 0 && ballXSpeed < 10)
 				ballXSpeed++;
 			
 			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y);
