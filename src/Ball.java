@@ -17,10 +17,10 @@ public class Ball {
     	updateLocation();
         checkCollisionWithSides();
         checkVictoryConditions();
-        checkCollisionWithRackets();
+        checkCollisionWithPaddles();
     }
     
-    private void checkCollisionWithRackets() {
+    private void checkCollisionWithPaddles() {
 		
 	}
 
