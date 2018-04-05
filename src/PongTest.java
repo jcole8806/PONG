@@ -1,4 +1,7 @@
 //TODO make code more readable (break stuff up into methods)
+//TODO make game playable on all screen resolutions
+//TODO make collisions look prettier
+//TODO add second paddle
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -26,7 +29,6 @@ public class PongTest {
 	}
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
-		//TODO add second paddle
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
