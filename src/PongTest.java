@@ -28,7 +28,8 @@ public class PongTest {
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int direction = -1;
+		private int ballDirection = -1, paddleDirection, ballSpeed = 5, paddleSpeed = 5;
+		private boolean moving = false;
 
 		public GamePanel() {
 			setFocusable(true);
@@ -49,14 +50,18 @@ public class PongTest {
 		}
 
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == 38 && paddle.y > 10)
-				paddle.setLocation(paddle.x, paddle.y - 5);
-			else if(e.getKeyCode() == 40 && paddle.y < 1054) 
-				paddle.setLocation(paddle.x, paddle.y + 5);
+			if(e.getKeyCode() == 38 || e.getKeyCode() == 40) {
+				moving = true;
+				if(e.getKeyCode() == 38)
+					paddleDirection = -1;
+				else if(e.getKeyCode() == 40)
+					paddleDirection = 1;
+			}	
 		}
 
 		public void keyReleased(KeyEvent e) {
-			
+			if(e.getKeyCode() == 38 || e.getKeyCode() == 40)
+				moving = false;
 		}
 
 		public void keyTyped(KeyEvent e) {
@@ -65,10 +70,15 @@ public class PongTest {
 
 		public void actionPerformed(ActionEvent e) {
 			// need to check y, figure that out
+			if(moving)
+				if(paddleDirection == -1 && paddle.y > 10)
+					paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
+				else if (paddleDirection == 1 && paddle.y < 755)
+					paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
 			if(ball.getLocation().x - (paddle.x + 20) <= 0)
-				direction *= -1;
+				ballDirection *= -1;
 			
-			ball.setLocation(ball.x + 5*direction, ball.y);
+			ball.setLocation(ball.x + ballSpeed*ballDirection, ball.y);
 		}
 		
 	}
