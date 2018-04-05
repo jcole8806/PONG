@@ -1,3 +1,8 @@
+//TODO make code more readable (break stuff up into methods)
+//TODO make game playable on all screen resolutions
+//TODO make collisions look prettier
+//TODO add second paddle
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -24,11 +29,11 @@ public class PongTest {
 	}
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
-		//need to add second paddle, make variable for speed (both ball and paddle), etc.
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int direction = -1;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+		private boolean paddleMoving = false, tangible = true;
 
 		public GamePanel() {
 			setFocusable(true);
@@ -46,17 +51,36 @@ public class PongTest {
 			g.setColor(Color.WHITE);
 			g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 			g.fillRect(ball.x, ball.y, ball.width, ball.height);
+			g.drawRect(10, 10, 1000, 755);
+		}
+		
+		private boolean hitPaddle() {
+			if (ball.x < paddle.x + paddle.width - ballXSpeed)
+				tangible = false;
+			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
+				ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;
+				return true;
+			}
+				
+			return false;
 		}
 
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == 38 && paddle.y > 10)
-				paddle.setLocation(paddle.x, paddle.y - 5);
-			else if(e.getKeyCode() == 40 && paddle.y < 1054) 
-				paddle.setLocation(paddle.x, paddle.y + 5);
+			if(e.getKeyCode() == 38 || e.getKeyCode() == 40) {
+				paddleMoving = true;
+				if(e.getKeyCode() == 38)
+					paddleDirection = -1;
+				else if(e.getKeyCode() == 40)
+					paddleDirection = 1;
+			}	else if(e.getKeyCode() == 32 && ballXSpeed == 0) {
+					tangible = true;
+					ballXSpeed++;
+			}		
 		}
 
 		public void keyReleased(KeyEvent e) {
-			
+			if(e.getKeyCode() == 38 || e.getKeyCode() == 40)
+				paddleMoving = false;
 		}
 
 		public void keyTyped(KeyEvent e) {
@@ -64,11 +88,25 @@ public class PongTest {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			// need to check y, figure that out
-			if(ball.getLocation().x - (paddle.x + 20) <= 0)
-				direction *= -1;
+			if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
+				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
+			if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > 1000)
+				ballDirection *= -1;
 			
-			ball.setLocation(ball.x + 5*direction, ball.y);
+			i++;
+			if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
+				ballXSpeed++;
+
+			ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
+			
+			if(ball.y <= 10 || ball.y >= 755)
+				ballYVelocity*= -1;
+			
+			if(ball.x <= 0) {
+				ball.setLocation(300, 300);
+				ballXSpeed = 0;
+				ballYVelocity = 0;
+			}	
 		}
 		
 	}

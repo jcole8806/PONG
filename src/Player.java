@@ -1,5 +1,7 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Player {
+public class Player implements KeyListener {
 	
 	private Paddle paddle;
 	private int score = 0;
@@ -9,6 +11,18 @@ public class Player {
 	}
 	
 	public void movePaddle() {
+		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	public void keyTyped(KeyEvent e) {
 		
 	}
 
