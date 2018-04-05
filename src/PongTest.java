@@ -24,7 +24,7 @@ public class PongTest {
 	}
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
-		//need to add second paddle
+		//TODO add second paddle
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
 		private Timer timer = new Timer(10, this);
@@ -68,8 +68,10 @@ public class PongTest {
 					paddleDirection = -1;
 				else if(e.getKeyCode() == 40)
 					paddleDirection = 1;
-			}	else if(e.getKeyCode() == 32 && ballXSpeed == 0)
+			}	else if(e.getKeyCode() == 32 && ballXSpeed == 0) {
+					tangible = true;
 					ballXSpeed++;
+			}		
 		}
 
 		public void keyReleased(KeyEvent e) {
@@ -95,6 +97,12 @@ public class PongTest {
 			
 			if(ball.y <= 10 || ball.y >= 755)
 				ballYVelocity*= -1;
+			
+			if(ball.x <= 0) {
+				ball.setLocation(300, 300);
+				ballXSpeed = 0;
+				ballYVelocity = 0;
+			}	
 		}
 		
 	}
