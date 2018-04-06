@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Game extends JPanel implements ActionListener{
 	private int gamesWon = 0;
-	private Player player1, player2;
+	Player player1, player2;
 	private Timer timer = new Timer(10,this);
 	
 	public Game(Player player1, Player player2) {

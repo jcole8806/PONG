@@ -14,6 +14,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private String[] optionTexts = {"Start Game", "Options", "Instructions", "Exit Game"};
 	private JButton[] options = new JButton[optionTexts.length];
+	//private Game game = new Game();
 	
 	public MainMenu() {
 		setBackground(Color.BLACK);
@@ -40,7 +41,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Start Game")) {
-			Pong.pongFrame.setContentPane(new MainGame(new Game));
+			//Pong.pongFrame.setContentPane(new MainGame());
 		} else if(e.getActionCommand().equals("Options")) {
 			Pong.pongFrame.setContentPane(new OptionsMenu());
 		} else if(e.getActionCommand().equals("Instructions")) {

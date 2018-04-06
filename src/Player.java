@@ -13,6 +13,10 @@ public class Player implements KeyListener {
 	public void movePaddle() {
 		
 	}
+	
+	int getScore(){
+		return score;
+	}
 
 	public void keyPressed(KeyEvent e) {
 		

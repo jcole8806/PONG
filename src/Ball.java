@@ -15,7 +15,7 @@ public class Ball {
 
     public void update() {
     	updateLocation();
-        checkCollisionWithSides();
+    	checkCollisionWithTopOrBottom();
         checkVictoryConditions();
         checkCollisionWithPaddles();
     }
@@ -25,11 +25,17 @@ public class Ball {
 	}
 
 	private void checkVictoryConditions() {
-		
+		if(game.player1.getScore() == 3){
+			Winner player1Winner = new Winner(game.player1);
+		}else if(game.player2.getScore() == 3){
+			Winner player2Winner = new Winner(game.player2);
+		}
 	}
 
-	private void checkCollisionWithSides() {
-		
+	private void checkCollisionWithTopOrBottom() {
+		if(hasHitTopOrBottom()){
+			y+= -yDirection;
+		}
 	}
 
 	private void updateLocation() {

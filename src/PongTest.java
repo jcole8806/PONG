@@ -14,6 +14,8 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
+//Jack, I added a second paddle :D and some other stuff in other classes during class
+
 public class PongTest {
 	
 	private static JFrame frame;
@@ -30,9 +32,9 @@ public class PongTest {
 	
 	private class GamePanel extends JPanel implements KeyListener, ActionListener{
 		private static final long serialVersionUID = 1L;
-		private Rectangle paddle = new Rectangle(), ball = new Rectangle();
+		private Rectangle paddle = new Rectangle(), ball = new Rectangle(), compPaddle = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYVelocity = 0, paddleSpeed = 5, i = 0;
 		private boolean paddleMoving = false, tangible = true;
 
 		public GamePanel() {
@@ -42,6 +44,7 @@ public class PongTest {
 			setBackground(Color.BLACK);
 			setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 			paddle.setBounds(100, 100, 20, 100);
+			compPaddle.setBounds(1500, 100, 20, 100);
 			ball.setBounds(300, 300, 20, 20);
 			timer.start();
 		}
@@ -50,6 +53,7 @@ public class PongTest {
 			super.paint(g);
 			g.setColor(Color.WHITE);
 			g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+			g.fillRect(compPaddle.x, compPaddle.y, compPaddle.width, compPaddle.height);
 			g.fillRect(ball.x, ball.y, ball.width, ball.height);
 			g.drawRect(10, 10, 1000, 755);
 		}
@@ -61,7 +65,7 @@ public class PongTest {
 				ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;
 				return true;
 			}
-				
+			
 			return false;
 		}
 
@@ -86,13 +90,13 @@ public class PongTest {
 		public void keyTyped(KeyEvent e) {
 			
 		}
-
+		
 		public void actionPerformed(ActionEvent e) {
 			if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
 				paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
 			if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > 1000)
 				ballDirection *= -1;
-			
+				
 			i++;
 			if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
 				ballXSpeed++;
