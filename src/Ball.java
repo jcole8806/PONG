@@ -1,14 +1,20 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Ball {
-    private static final int WIDTH = 30, HEIGHT = 30;
+    //private static final int WIDTH = 30, HEIGHT = 30;
     private Game game;
-    private int x, y, xDirection = 2, yDirection = 2;
-
+    private int x, y, size, xDirection = 2, yDirection = 2;
+    private Color ballColor;
+    private List<LocationListener> locationListeners = new ArrayList<LocationListener>();
+    
     public Ball(Game game) {
         this.game = game;
+        ballColor = Color.white;
         x = 800;
         y = 400;
     }
@@ -16,20 +22,11 @@ public class Ball {
     public void update() {
     	updateLocation();
     	checkCollisionWithTopOrBottom();
-        checkVictoryConditions();
         checkCollisionWithPaddles();
     }
     
     private void checkCollisionWithPaddles() {
 		
-	}
-
-	private void checkVictoryConditions() {
-		if(game.player1.getScore() == 3){
-			Winner player1Winner = new Winner(game.player1);
-		}else if(game.player2.getScore() == 3){
-			Winner player2Winner = new Winner(game.player2);
-		}
 	}
 
 	private void checkCollisionWithTopOrBottom() {
@@ -41,6 +38,8 @@ public class Ball {
 	private void updateLocation() {
 		x += xDirection;
 		y += yDirection;
+		for (LocationListener listener : locationListeners)
+			listener.locationChanged(new LocationEvent(x, y));
 	}
 
 	private boolean hasHitTopOrBottom() {
@@ -48,10 +47,15 @@ public class Ball {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, size, size);
+    }
+    
+    public void addListener(LocationListener toAdd) {
+        locationListeners.add(toAdd);
     }
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, WIDTH, HEIGHT);
+    	g.setColor(ballColor);
+        g.fillRect(x, y, size, size);
     }
 }

@@ -2,18 +2,23 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Game extends JPanel implements ActionListener{
+public class Game implements ActionListener{
 	private int gamesWon = 0;
 	Player player1, player2;
 	private Timer timer = new Timer(10,this);
+	private Ball ball;
 	
 	public Game(Player player1, Player player2) {
-		setFocusable(true);
-		requestFocus();
 		this.player1 = player1;
 		this.player2 = player2;
-		setBackground(Color.BLACK);
-		timer.start();
+		this.ball = new Ball(this);
+		
+	}
+	
+	public Game(){
+		this(new HumanPlayer(), new ComputerPlayer());
+		ComputerPlayer compPlayer = (ComputerPlayer) this.player2;
+		this.ball.addListener(compPlayer);
 	}
 	
 	public void roundWon(){
@@ -31,7 +36,10 @@ public class Game extends JPanel implements ActionListener{
 		return false;
 	}
 	
-	
+	public void start(){
+		//
+		timer.start();
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		if(gameOver()){
