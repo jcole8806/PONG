@@ -2,6 +2,7 @@
 //TODO make game playable on all screen resolutions
 //TODO make collisions look prettier
 //TODO add second paddle
+//TODO implement sound effects
 
 import java.awt.Color;
 import java.awt.Graphics;

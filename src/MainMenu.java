@@ -17,6 +17,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	//private Game game = new Game();
 	
 	public MainMenu() {
+		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
 		
@@ -24,19 +25,17 @@ public class MainMenu extends JPanel implements ActionListener {
 			options[i] = new JButton(optionTexts[i]);
 			options[i].setActionCommand(options[i].getText());
 			options[i].addActionListener(this);
+			options[i].setBounds(Pong.screenSize.width/2 - 200, Pong.screenSize.height/2 + 50*i, 400, 40);
 			add(options[i]);
 		}
-		//JPanel buttonPanel = new JPanel();
-		//buttonPanel.setBounds(0, 800, 800, 800);
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Comic Sans", 1, 100));
-		g.drawString("PONG", Pong.screenSize.width/2, Pong.screenSize.height/10);
+		g.drawString("PONG", Pong.screenSize.width/2 - 295/2, Pong.screenSize.height/10);
 	}
 
 	public void actionPerformed(ActionEvent e) {
