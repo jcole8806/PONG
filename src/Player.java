@@ -11,7 +11,11 @@ public class Player{
 	}
 	
 	public void movePaddle(int dir) {
-		
+		if(dir >= 1){
+			paddle.move(dir);
+		}else if(dir <= 0){
+			
+		}
 	}
 	
 	int getScore(){

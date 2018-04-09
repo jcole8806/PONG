@@ -37,7 +37,7 @@ public class Game implements ActionListener{
 	}
 	
 	public void start(){
-		//
+		//starts the timer whenever this method is called instead f everytime a new game is made
 		timer.start();
 	}
 

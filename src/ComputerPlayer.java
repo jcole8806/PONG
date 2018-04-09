@@ -7,10 +7,9 @@
 
 public class ComputerPlayer extends Player implements LocationListener{
 
-	@Override
 	public void locationChanged(LocationEvent event) {
 		// this updates the paddle pos based on the location of ball
-		
+		//if(event.getY() > )
 		
 	}
 	

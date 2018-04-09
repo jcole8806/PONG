@@ -38,7 +38,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		Pong.pongFrame.setContentPane(new MainMenu());
 	}
-
+	
 	public void keyPressed(KeyEvent e) {
 		//if(e.getKeyCode() == KeyEvent.){
 			

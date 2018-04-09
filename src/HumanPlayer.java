@@ -19,19 +19,19 @@ public class HumanPlayer extends Player implements KeyListener{
 		return downID;
 	}
 
-	@Override
+	
 	public void keyPressed(KeyEvent e) {
 		
 		
 	}
 
-	@Override
+	
 	public void keyReleased(KeyEvent e) {
 		
 		
 	}
 
-	@Override
+	
 	public void keyTyped(KeyEvent e) {
 		
 		
