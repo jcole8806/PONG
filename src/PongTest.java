@@ -3,6 +3,7 @@
 //TODO make collisions look prettier
 //TODO add second paddle
 //TODO implement sound effects
+//TODO figure out how to use this through MainMenu
 
 import java.awt.Color;
 import java.awt.Graphics;
