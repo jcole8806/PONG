@@ -34,7 +34,7 @@ public class PongTest {
 		private static final long serialVersionUID = 1L;
 		private Rectangle paddle = new Rectangle(), ball = new Rectangle(), compPaddle = new Rectangle();
 		private Timer timer = new Timer(10, this);
-		private int ballDirection = -1, paddleDirection, ballXSpeed = 1, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+		private int ballDirection = -1, paddleDirection, ballXSpeed = 5, ballYVelocity = 0, paddleSpeed = 5, i = 0;
 		private boolean paddleMoving = false, tangible = true;
 
 		public GamePanel() {
