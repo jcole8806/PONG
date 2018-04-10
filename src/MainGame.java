@@ -36,7 +36,8 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 		g.fillRect(compPaddle.x, compPaddle.y, compPaddle.width, compPaddle.height);
 		g.fillRect(ball.x, ball.y, ball.width, ball.height);
-		g.drawRect(10, 10, 1000, 755);
+		for(int i = 0; i <= 47; i++)
+			g.fillRect(Pong.screenSize.width/2 - 5, 18 * i, 10, 12);
 	}
 	
 	private boolean hitPaddle() {
@@ -73,9 +74,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < 755)))
+		if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < Pong.screenSize.height - 75)))
 			paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
-		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > 1000)
+		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > Pong.screenSize.width)
 			ballDirection *= -1;
 			
 		i++;
@@ -84,7 +85,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 
 		ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
 		
-		if(ball.y <= 10 || ball.y >= 755)
+		if(ball.y <= 10 || ball.y >= Pong.screenSize.height - 75)
 			ballYVelocity*= -1;
 		
 		if(ball.x <= 0) {
