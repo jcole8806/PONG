@@ -1,4 +1,9 @@
+//TODO Add collision detection/AI to second paddle
+//TODO Add powerups
+//TODO Add two player functionality
+
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -14,7 +19,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Rectangle paddle = new Rectangle(), ball = new Rectangle(), compPaddle = new Rectangle();
 	private Timer timer = new Timer(10, this);
-	private int ballDirection = -1, paddleDirection, ballXSpeed = 5, ballYVelocity = 0, paddleSpeed = 5, i = 0;
+	private int ballDirection = -1, paddleDirection, ballXSpeed = 5, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
 	private boolean paddleMoving = false, tangible = true;
 
 	public MainGame() {
@@ -38,6 +43,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.fillRect(ball.x, ball.y, ball.width, ball.height);
 		for(int i = 0; i <= 47; i++)
 			g.fillRect(Pong.screenSize.width/2 - 5, 18 * i, 10, 12);
+		g.setFont(new Font("Comic Sans", 1, 100));
+		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
+		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
+		
 	}
 	
 	private boolean hitPaddle() {
@@ -92,7 +101,13 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ball.setLocation(300, 300);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
-		}	
+			player2Score++;
+		} else if(ball.x >= Pong.screenSize.width) {
+			ball.setLocation(300, 300);
+			ballXSpeed = 0;
+			ballYVelocity = 0;
+			player1Score++;
+		}
 	}
 	
 }

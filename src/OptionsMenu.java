@@ -1,4 +1,4 @@
-// Add option to change control configuration
+//TODO Add option to change control configuration
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
