@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ public class Instruction extends JPanel implements ActionListener{
 				+ "the screen from your side, and instead trying to get the ball to pass off the screen"
 				+ "from the other side.");
 		instructions.setFont(instructions.getFont().deriveFont(20.0f));
+		instructions.setForeground(Color.white);
 		
 		add(instructions);
 		JButton back = new JButton("Go Back");
@@ -33,6 +35,17 @@ public class Instruction extends JPanel implements ActionListener{
 		});
 		add(gameStart);
 	}
+	
+	/*
+	public void paint(Graphics g){
+		super.paint(g);
+		setBackground(Color.BLACK);
+		setSize(Pong.screenSize);
+		g.setColor(Color.white);
+		g.drawString("Instruct!", Pong.screenSize.width/2, Pong.screenSize.height/2);
+		g.setFont(this.getFont().deriveFont(20.0f));
+	}
+	*/
 
 	public void actionPerformed(ActionEvent e) {
 		Pong.pongFrame.setContentPane(new MainMenu());
