@@ -19,7 +19,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Rectangle paddle = new Rectangle(), ball = new Rectangle(), compPaddle = new Rectangle();
 	private Timer timer = new Timer(10, this);
-	private int ballDirection = -1, paddleDirection, ballXSpeed = 5, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
+	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
 	private boolean paddleMoving = false, tangible = true;
 
 	public MainGame() {
@@ -29,9 +29,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		addKeyListener(this);
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
-		paddle.setBounds(100, 100, 20, 100);
-		compPaddle.setBounds(1500, 100, 20, 100);
-		ball.setBounds(300, 300, 20, 20);
+		paddle.setBounds(100, Pong.screenSize.height/2 - 50, 20, 100);
+		compPaddle.setBounds(Pong.screenSize.width-100, Pong.screenSize.height/2 - 50, 20, 100);
+		ball.setBounds(Pong.screenSize.width/2 - 10, Pong.screenSize.height/2, 20, 20);
 		timer.start();
 	}
 	
@@ -69,7 +69,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 				paddleDirection = 1;
 		}	else if(e.getKeyCode() == 32 && ballXSpeed == 0) {
 				tangible = true;
-				ballXSpeed++;
+				ballXSpeed = 5;
 		}		
 	}
 
@@ -98,12 +98,12 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballYVelocity*= -1;
 		
 		if(ball.x <= 0) {
-			ball.setLocation(300, 300);
+			ball.setLocation(Pong.screenSize.width/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player2Score++;
 		} else if(ball.x >= Pong.screenSize.width) {
-			ball.setLocation(300, 300);
+			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player1Score++;
