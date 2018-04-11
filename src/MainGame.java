@@ -50,7 +50,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	private boolean hitPaddle() {
-		if (ball.x < paddle.x + paddle.width - ballXSpeed)
+		if (ball.x < paddle.x + paddle.width - ballXSpeed || ball.x > compPaddle.x + compPaddle.width + ballXSpeed)
 			tangible = false;
 		if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
 			ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;
@@ -85,7 +85,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < Pong.screenSize.height - 75)))
 			paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
-		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle() || ball.x > Pong.screenSize.width)
+		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
 			
 		i++;
@@ -108,6 +108,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballYVelocity = 0;
 			player1Score++;
 		}
+		
+		if(player1Score == 11)
+			Pong.pongFrame.setContentPane(new Winner(1));
+		else if(player2Score == 11)
+			Pong.pongFrame.setContentPane(new Winner(2));
 	}
 	
 }
