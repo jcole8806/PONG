@@ -6,25 +6,25 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Winner extends JPanel {
+public class Winner extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private int winnerNum;
+	private String[] optionTexts = {"New Game", "Main Menu"};
+	private JButton[] options = new JButton[optionTexts.length];
 	
 	public Winner(int winnerNum){
+		this.winnerNum = winnerNum;
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
 		
-		JButton gameStart = new JButton("New Game");
-		gameStart.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Pong.pongFrame.setContentPane(new MainGame());
-				Pong.pongFrame.getContentPane().requestFocus();
-			}
-		});
-		
-		this.winnerNum = winnerNum;
+		for(int i = 0; i < options.length; i++) {
+			options[i] = new JButton(optionTexts[i]);
+			options[i].setActionCommand(options[i].getText());
+			options[i].addActionListener(this);
+			options[i].setBounds(Pong.screenSize.width/2 - 200, Pong.screenSize.height/2 + 50*i, 400, 40);
+			add(options[i]);
+		}
 	}
 	
 	public void paint(Graphics g) {
@@ -32,6 +32,16 @@ public class Winner extends JPanel {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Comic Sans", 1, 100));
 		g.drawString("Player " + winnerNum + " wins!", Pong.screenSize.width/2 - g.getFontMetrics().stringWidth("Player " + winnerNum + " wins!")/2, Pong.screenSize.height/4);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		//TODO Fix this
+		// For some reason, it breaks only if a game has been played
+		if(e.getActionCommand().equals("New Game")) {
+			Pong.pongFrame.setContentPane(new MainGame());
+			Pong.pongFrame.getContentPane().requestFocus();
+		} else if(e.getActionCommand().equals("Main Menu"))
+			Pong.pongFrame.setContentPane(new MainMenu());
 	}
 	
 }
