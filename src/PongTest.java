@@ -61,7 +61,7 @@ public class PongTest {
 		}
 		
 		private boolean hitPaddle() {
-			if (ball.x < paddle.x + paddle.width - ballXSpeed)
+			if ((ball.x < paddle.x + paddle.width - ballXSpeed) || (ball.x > compPaddle.x + compPaddle.width - ballXSpeed))
 				tangible = false;
 			if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
 				ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;

@@ -11,6 +11,7 @@ public class Instruction extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	public Instruction() {
+		
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
 		JLabel instructions = new JLabel("Instructions: Use the up and down arrow keys on the keyboard"
