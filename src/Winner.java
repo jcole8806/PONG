@@ -35,8 +35,6 @@ public class Winner extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		//TODO Fix this
-		// For some reason, it breaks only if a game has been played
 		if(e.getActionCommand().equals("New Game")) {
 			Pong.pongFrame.setContentPane(new MainGame());
 			Pong.pongFrame.getContentPane().requestFocus();

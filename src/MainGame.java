@@ -61,20 +61,20 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == 38 || e.getKeyCode() == 40) {
+		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
 			paddleMoving = true;
-			if(e.getKeyCode() == 38)
+			if(e.getKeyCode() == 87)
 				paddleDirection = -1;
-			else if(e.getKeyCode() == 40)
+			else if(e.getKeyCode() == 83)
 				paddleDirection = 1;
 		}	else if(e.getKeyCode() == 32 && ballXSpeed == 0) {
 				tangible = true;
 				ballXSpeed = 5;
-		}		
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == 38 || e.getKeyCode() == 40)
+		if(e.getKeyCode() == 87 || e.getKeyCode() == 83)
 			paddleMoving = false;
 	}
 
@@ -109,10 +109,15 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			player1Score++;
 		}
 		
-		if(player1Score == 11)
-			Pong.pongFrame.setContentPane(new Winner(1));
-		else if(player2Score == 11)
-			Pong.pongFrame.setContentPane(new Winner(2));
+		if(player1Score == 11 || player2Score == 11) {
+			if(player1Score == 11)
+				Pong.pongFrame.setContentPane(new Winner(1));
+			else if(player2Score == 11)
+				Pong.pongFrame.setContentPane(new Winner(2));
+			Pong.pongFrame.remove(this);
+			player1Score = 0;
+			player2Score = 0;
+		}
 	}
 	
 }
