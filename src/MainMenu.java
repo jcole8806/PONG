@@ -40,7 +40,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals("Start Game"))
 			Pong.pongFrame.setContentPane(new Instruction());
 		else if(e.getActionCommand().equals("Options"))
-			Pong.pongFrame.setContentPane(new OptionsMenu());
+			Pong.pongFrame.setContentPane(Pong.settings);
 		else if(e.getActionCommand().equals("Exit Game"))
 			System.exit(0);	
 	}

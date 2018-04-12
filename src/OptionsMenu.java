@@ -12,15 +12,15 @@ import javax.swing.JPanel;
 
 public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 	private static final long serialVersionUID = 1L;
-	public static OptionsMenu settings;
 	
 	public OptionsMenu() {
-		settings = this;
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
+		
 		JButton back = new JButton("Go Back");
 		back.addActionListener(this);
+		back.setActionCommand(back.getText());
 		back.setBounds(Pong.screenSize.width/2 - 200, Pong.screenSize.height/2 + 50*2, 400, 40);
 		add(back);
 	}
@@ -33,7 +33,9 @@ public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Pong.pongFrame.setContentPane(new MainMenu());
+		if(e.getActionCommand().equals("Go Back"))
+			Pong.pongFrame.setContentPane(new MainMenu());
+		
 	}
 
 	public void keyPressed(KeyEvent e) {
