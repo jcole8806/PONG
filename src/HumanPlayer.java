@@ -7,8 +7,8 @@ public class HumanPlayer extends Player implements KeyListener{
 	
 	public HumanPlayer() {
 		super();
-		upID = OptionsMenu.settings.getPlayer1Up();
-		downID = OptionsMenu.settings.getPlayer1Down();
+		//upID = OptionsMenu.settings.getPlayer1Up();
+		//downID = OptionsMenu.settings.getPlayer1Down();
 	}
 	
 	public int getUpID() {
