@@ -91,9 +91,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
 		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
-		if((ball.getLocation().x + (compPaddle.x - 20) >= 1500) && hitPaddle()){
-			ballDirection *= 1;
-		}
+//		if((ball.getLocation().x + (compPaddle.x - 20) >= 1500) && hitPaddle()){
+//			ballDirection *= 1;
+//		}
 		
 		i++;
 		if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
