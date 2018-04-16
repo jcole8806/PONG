@@ -1,5 +1,6 @@
 //TODO Make buttons look nice
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,8 @@ public class MainMenu extends JPanel implements ActionListener {
 		setFocusable(true);
 		setLayout(null);
 		setBackground(Color.BLACK);
-		setSize(Pong.screenSize);
+		Dimension panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
+		setSize(panelSize);
 		
 		for(int i = 0; i < options.length; i++) {
 			options[i] = new JButton(optionTexts[i]);

@@ -3,11 +3,11 @@ import java.awt.event.KeyListener;
 
 public class Player{
 	
-	private Paddle paddle;
+	protected Paddle paddle;
 	private int score = 0;
 	
 	public Player() {
-		paddle = new Paddle(this);
+		
 	}
 	
 	public void movePaddle(int dir) {
@@ -21,6 +21,12 @@ public class Player{
 	int getScore(){
 		return score;
 	}
+
+	public Paddle getPaddle() {
+		return paddle;
+	}
 	
-	
+	public void initPaddle(int side){
+		paddle = new Paddle(side);
+	}
 }

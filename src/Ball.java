@@ -8,7 +8,11 @@ import java.util.List;
 public class Ball {
     //private static final int WIDTH = 30, HEIGHT = 30;
     private Game game;
-    private int x, y, size, xDirection = 2, yDirection = 2;
+    int x;
+	int y;
+	int size;
+	private int xDirection = 2;
+	private int yDirection = 2;
     private Color ballColor;
     private List<LocationListener> locationListeners = new ArrayList<LocationListener>();
     
@@ -17,9 +21,16 @@ public class Ball {
         ballColor = Color.white;
         x = 800;
         y = 400;
+        initBall();
     }
 
-    public void update() {
+    private void initBall() {
+		x = Pong.screenSize.width/2 - 10;
+		y = Pong.screenSize.height/2;
+		size = 20;
+	}
+
+	public void update() {
     	updateLocation();
     	checkCollisionWithTopOrBottom();
         checkCollisionWithPaddles();
@@ -58,4 +69,13 @@ public class Ball {
     	g.setColor(ballColor);
         g.fillRect(x, y, size, size);
     }
+
+	public void setLocation(int x, int y) {
+		this.x = x;
+		this.y = y;
+		for (LocationListener listener : locationListeners)
+			listener.locationChanged(new LocationEvent(x, y));
+	}
+    
+    
 }

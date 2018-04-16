@@ -17,30 +17,45 @@ import javax.swing.Timer;
 
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
-	private Rectangle paddle = new Rectangle(), ball = new Rectangle(), compPaddle = new Rectangle();
+	//private Rectangle ball = new Rectangle();
 	private Timer timer = new Timer(10, this);
 	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
 	private boolean paddleMoving = false, tangible = true;
-
+	private Ball ball;
+	private Paddle paddle, compPaddle;
+	private HumanPlayer human;
+	private ComputerPlayer comp;
+	private Game game;
+	
 	public MainGame() {
+		game = new Game();
+		ball = game.getBall();
+		human = (HumanPlayer) game.getPlayer1();
+		human.initPaddle(Paddle.LEFT);
+		comp = (ComputerPlayer) game.getPlayer2();
+		comp.initPaddle(Paddle.RIGHT);
+		paddle = human.getPaddle();
+		compPaddle = comp.getPaddle();
+		
 		setFocusable(true);
 		setSize(Pong.screenSize);
 		requestFocus();
 		addKeyListener(this);
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
-		paddle.setBounds(100, Pong.screenSize.height/2 - 50, 20, 100);
-		compPaddle.setBounds(Pong.screenSize.width-100, Pong.screenSize.height/2 - 50, 20, 100);
-		ball.setBounds(Pong.screenSize.width/2 - 10, Pong.screenSize.height/2, 20, 20);
+		//paddle.setBounds(100, Pong.screenSize.height/2 - 50, 20, 100);
+		//compPaddle.setBounds(Pong.screenSize.width-100, Pong.screenSize.height/2 - 50, 20, 100);
+		//ball.setBounds(Pong.screenSize.width/2 - 10, Pong.screenSize.height/2, 20, 20);
 		timer.start();
+		
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.WHITE);
-		g.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-		g.fillRect(compPaddle.x, compPaddle.y, compPaddle.width, compPaddle.height);
-		g.fillRect(ball.x, ball.y, ball.width, ball.height);
+		paddle.paint(g);
+		compPaddle.paint(g);
+		ball.paint(g);
 		for(int i = 0; i <= 47; i++)
 			g.fillRect(Pong.screenSize.width/2 - 5, 18 * i, 10, 12);
 		g.setFont(new Font("Comic Sans", 1, 100));
@@ -50,10 +65,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	private boolean hitPaddle() {
-		if (ball.x < paddle.x + paddle.width - ballXSpeed || ball.x > compPaddle.x + compPaddle.width + ballXSpeed)
+		if (ball.x < paddle.xPos + paddle.width - ballXSpeed || ball.x > compPaddle.xPos + compPaddle.width + ballXSpeed)
 			tangible = false;
-		if(ball.y >= paddle.y - ball.height && ball.y <= paddle.y + paddle.height && tangible) {
-			ballYVelocity = (ball.y - (paddle.y + paddle.height/2))/20;
+		if(ball.y >= paddle.yPos - ball.size && ball.y <= paddle.yPos + paddle.size && tangible) {
+			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/20;
 			return true;
 		}
 		
@@ -87,9 +102,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(paddleMoving && ((paddleDirection == -1 && paddle.y > 10) ||(paddleDirection == 1 && paddle.y < Pong.screenSize.height - 75)))
-			paddle.setLocation(paddle.x, paddle.y + paddleSpeed*paddleDirection);
-		if((ball.getLocation().x - (paddle.x + 20) <= 0) && hitPaddle())
+		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 75)))
+			//paddle.setLocation(paddle.xPos, paddle.yPos + paddleSpeed*paddleDirection);
+			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
+		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
 //		if((ball.getLocation().x + (compPaddle.x - 20) >= 1500) && hitPaddle()){
 //			ballDirection *= 1;
