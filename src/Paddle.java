@@ -49,6 +49,8 @@ public class Paddle {
 		g.fillRect(xPos, yPos, width, size);
 	}
 	
-	
+	public void setY(int y) {
+		yPos = y;
+	}
 	
 }

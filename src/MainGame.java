@@ -1,6 +1,6 @@
-//TODO Add collision detection/AI to second paddle
 //TODO Add powerups
 //TODO Add two player functionality
+//TODO Add sound effects
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +17,6 @@ import javax.swing.Timer;
 
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
-	//private Rectangle ball = new Rectangle();
 	private Timer timer = new Timer(10, this);
 	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
 	private boolean paddleMoving = false, tangible = true;
@@ -43,11 +42,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		addKeyListener(this);
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
-		//paddle.setBounds(100, Pong.screenSize.height/2 - 50, 20, 100);
-		//compPaddle.setBounds(Pong.screenSize.width-100, Pong.screenSize.height/2 - 50, 20, 100);
-		//ball.setBounds(Pong.screenSize.width/2 - 10, Pong.screenSize.height/2, 20, 20);
 		timer.start();
-		
 	}
 	
 	public void paint(Graphics g) {
@@ -71,11 +66,6 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/20;
 			return true;
 		}
-		
-		//if(ball.y <= compPaddle.y ){
-			
-		//}
-		
 		return false;
 	}
 	
@@ -103,13 +93,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 75)))
-			//paddle.setLocation(paddle.xPos, paddle.yPos + paddleSpeed*paddleDirection);
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
 		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
-//		if((ball.getLocation().x + (compPaddle.x - 20) >= 1500) && hitPaddle()){
-//			ballDirection *= 1;
-//		}
+		else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size)
+				ballDirection *= -1;
 		
 		i++;
 		if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
@@ -125,11 +113,13 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player2Score++;
+			compPaddle.setY(Pong.screenSize.height/2 + compPaddle.size/2);
 		} else if(ball.x >= Pong.screenSize.width) {
 			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player1Score++;
+			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		}
 		
 		if(player1Score == 11 || player2Score == 11) {
