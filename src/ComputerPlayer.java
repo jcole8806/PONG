@@ -14,15 +14,25 @@ public class ComputerPlayer extends Player implements LocationListener{
 	public void locationChanged(LocationEvent event) {
 		// this updates the paddle pos based on the location of ball
 		//if(event.getY() > )
+		int dir = 1;
 		if(this.previousLocation != null){
+			if(event.getY() <= 10 || event.getY() >= Pong.screenSize.height - 75){
+				dir*=1;
+			}
+			
 			int yChanged = (int) (event.getY() - this.previousLocation.getY());
 			if(yChanged > 0){
-				this.paddle.yPos++;
+				this.paddle.yPos+=2*dir;
 			}else if(yChanged < 0){
-				this.paddle.yPos--;
+				this.paddle.yPos-=2*dir;
 			}
+		}else{
+			
 		}
-		//System.out.println("This reached");
+		
+		
+		
+		
 		this.previousLocation = new Point(event.getX(),event.getY());
 		
 		

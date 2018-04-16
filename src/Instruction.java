@@ -20,7 +20,7 @@ public class Instruction extends JPanel implements ActionListener{
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		//setSize(panelSize);
 		setLayout(new BorderLayout());
-		JTextArea instructions = new JTextArea(	"Instructions: Use the up and down arrow keys on the keyboard"
+		JTextArea instructions = new JTextArea(	" Instructions: Use the up and down arrow keys on the keyboard"
 				+ " to move your paddle. The objective of the game is to block the ball from passing off "
 				+ "the screen from your side, and instead trying to get the ball to pass off the screen"
 				+ "from the other side.");
