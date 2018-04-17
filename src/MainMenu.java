@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class MainMenu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private String[] optionTexts = {"Start Game", "Options", "Exit Game"};
+	private String[] optionTexts = {"1 Player", "2 Players", "Options", "Exit Game"};
 	private JButton[] options = new JButton[optionTexts.length];
 	
 	public MainMenu() {
@@ -39,7 +39,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Start Game"))
+		if(e.getActionCommand().equals("1 Player") || e.getActionCommand().equals("2 Players"))
 			Pong.pongFrame.setContentPane(new Instruction());
 		else if(e.getActionCommand().equals("Options"))
 			Pong.pongFrame.setContentPane(Pong.settings);
