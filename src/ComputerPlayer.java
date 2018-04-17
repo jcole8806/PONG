@@ -1,4 +1,6 @@
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /* I already have some ideas for the AI:
  * 	- Computer just moves up and down at a set pace until ball comes into contact with player's paddle
@@ -16,28 +18,17 @@ public class ComputerPlayer extends Player implements LocationListener{
 		//if(event.getY() > )
 		int dir = 1;
 		if(this.previousLocation != null){
-			if(event.getY() <= 10 || event.getY() >= Pong.screenSize.height - 75){
+			if(event.getY() <= 10 || event.getY() >= Pong.screenSize.height - 75);
 				dir*=1;
-			}
-			
+
 			int yChanged = (int) (event.getY() - this.previousLocation.getY());
-			if(yChanged > 0){
+			if(yChanged > 0 && this.paddle.yPos + this.paddle.size < Pong.screenSize.height - 75)
 				this.paddle.yPos+=2*dir;
-			}else if(yChanged < 0){
+			else if(yChanged < 0 && this.paddle.yPos > 0)
 				this.paddle.yPos-=2*dir;
-			}
-		}else{
-			
 		}
 		
-		
-		
-		
 		this.previousLocation = new Point(event.getX(),event.getY());
-		
-		
 	}
-	
-	
 	
 }
