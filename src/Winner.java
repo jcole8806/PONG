@@ -9,7 +9,7 @@ import javax.swing.*;
 public class Winner extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private int winnerNum;
-	private String[] optionTexts = {"New Game", "Main Menu"};
+	private String[] optionTexts = {"New Game", "Main Menu", "Exit Game"};
 	private JButton[] options = new JButton[optionTexts.length];
 	
 	public Winner(int winnerNum){
@@ -40,6 +40,8 @@ public class Winner extends JPanel implements ActionListener{
 			Pong.pongFrame.getContentPane().requestFocus();
 		} else if(e.getActionCommand().equals("Main Menu"))
 			Pong.pongFrame.setContentPane(new MainMenu());
+		else if(e.getActionCommand().equals("Exit Game"))
+			System.exit(0);
 	}
 	
 }
