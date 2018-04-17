@@ -15,6 +15,7 @@ public class Ball {
 	private int yDirection = 2;
     private Color ballColor;
     private List<LocationListener> locationListeners = new ArrayList<LocationListener>();
+    public int ballXSpeed = 0, ballYVelocity = 0;
     
     public Ball(Game game) {
         this.game = game;

@@ -1,6 +1,4 @@
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 /* I already have some ideas for the AI:
  * 	- Computer just moves up and down at a set pace until ball comes into contact with player's paddle
