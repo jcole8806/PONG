@@ -24,6 +24,14 @@ public class ComputerPlayer extends Player implements LocationListener{
 				this.paddle.yPos+=2*dir;
 			else if(yChanged < 0 && this.paddle.yPos > 0)
 				this.paddle.yPos-=2*dir;
+			
+			
+		}
+		
+		if(event.getY() > this.getPaddle().yPos){
+			while(this.getPaddle().yPos != event.getY()){
+				this.paddle.yPos++;
+			}
 		}
 		
 		this.previousLocation = new Point(event.getX(),event.getY());

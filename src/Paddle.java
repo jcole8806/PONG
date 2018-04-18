@@ -54,13 +54,13 @@ public class Paddle {
 	}
 	
 	
-	public boolean hitPaddle() {
-		if (ball.x < this.xPos + this.width - ballXSpeed || ball.x > compPaddle.xPos + compPaddle.width + ballXSpeed)
-			tangible = false;
-		if(ball.y >= this.yPos - ball.size && ball.y <= this.yPos + this.size && tangible) {
-			ballYVelocity = (ball.y - (this.yPos + this.size/2))/20;
-			return true;
-		}
-		return false;
-	}
+//	public boolean hitPaddle() {
+//		if (ball.x < this.xPos + this.width - ballXSpeed || ball.x > compPaddle.xPos + compPaddle.width + ballXSpeed)
+//			tangible = false;
+//		if(ball.y >= this.yPos - ball.size && ball.y <= this.yPos + this.size && tangible) {
+//			ballYVelocity = (ball.y - (this.yPos + this.size/2))/20;
+//			return true;
+//		}
+//		return false;
+//	}
 }
