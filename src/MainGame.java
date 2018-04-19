@@ -72,6 +72,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
 			paddleMoving = true;
+			tangible = true;
+			if(ballXSpeed == 0){
+				ballXSpeed = 5;
+			}
 			if(e.getKeyCode() == 87)
 				paddleDirection = -1;
 			else if(e.getKeyCode() == 83)
@@ -113,12 +117,14 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player2Score++;
-			compPaddle.setY(Pong.screenSize.height/2 + compPaddle.size/2);
+			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
+			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		} else if(ball.x >= Pong.screenSize.width) {
 			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
 			player1Score++;
+			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		}
 		
