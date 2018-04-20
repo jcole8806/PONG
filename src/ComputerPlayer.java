@@ -21,20 +21,21 @@ public class ComputerPlayer extends Player implements LocationListener{
 
 			int yChanged = (int) (event.getY() - this.previousLocation.getY());
 			if(yChanged > 0 && this.paddle.yPos + this.paddle.size < Pong.screenSize.height - 75)
-				this.paddle.yPos+=2*dir;
+				this.paddle.yPos+=1*dir;
 			else if(yChanged < 0 && this.paddle.yPos > 0)
 				
-				this.paddle.yPos-=2*dir;
+				this.paddle.yPos-=1*dir;
 			
 			if(event.getY() > this.getPaddle().yPos){
-				while(this.getPaddle().yPos != event.getY()){
+				//while(this.getPaddle().yPos != event.getY()){  Uncomment lines below to get an impossible AI
 					this.paddle.yPos++;
-				}
+				//}
 			}else if(event.getY() < this.getPaddle().yPos){
-				while(this.getPaddle().yPos != event.getY()){
+				//while(this.getPaddle().yPos != event.getY()){
 					this.paddle.yPos--;
-				}
+				//}
 			}
+			
 		}
 		
 		
