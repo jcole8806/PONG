@@ -8,7 +8,7 @@ public class Game implements ActionListener{
 	private Timer timer = new Timer(10,this);
 	private Ball ball;
 	
-	private Game(Player player1, Player player2) {
+	public Game(Player player1, Player player2) {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.ball = new Ball(this);

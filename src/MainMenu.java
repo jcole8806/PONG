@@ -39,8 +39,10 @@ public class MainMenu extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("1 Player") || e.getActionCommand().equals("2 Players"))
-			Pong.pongFrame.setContentPane(new Instruction());
+		if(e.getActionCommand().equals("1 Player"))
+			Pong.pongFrame.setContentPane(new Instruction(false));
+		else if(e.getActionCommand().equals("2 Players"))
+			Pong.pongFrame.setContentPane(new Instruction(true));
 		else if(e.getActionCommand().equals("Options"))
 			Pong.pongFrame.setContentPane(Pong.settings);
 		else if(e.getActionCommand().equals("Exit Game"))

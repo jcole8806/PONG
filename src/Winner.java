@@ -11,9 +11,11 @@ public class Winner extends JPanel implements ActionListener{
 	private int winnerNum;
 	private String[] optionTexts = {"New Game", "Main Menu", "Exit Game"};
 	private JButton[] options = new JButton[optionTexts.length];
+	private boolean twoHumans;
 	
-	public Winner(int winnerNum){
+	public Winner(int winnerNum, boolean twoHumans){
 		this.winnerNum = winnerNum;
+		this.twoHumans = twoHumans;
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
@@ -36,7 +38,7 @@ public class Winner extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("New Game")) {
-			Pong.pongFrame.setContentPane(new MainGame());
+			Pong.pongFrame.setContentPane(new MainGame(twoHumans));
 			Pong.pongFrame.getContentPane().requestFocus();
 		} else if(e.getActionCommand().equals("Main Menu"))
 			Pong.pongFrame.setContentPane(new MainMenu());

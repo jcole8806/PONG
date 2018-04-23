@@ -14,7 +14,7 @@ public class Instruction extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Dimension panelSize;
 	
-	public Instruction() {
+	public Instruction(boolean twoPlayers) {
 		
 		setBackground(Color.BLACK);
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
@@ -46,7 +46,7 @@ public class Instruction extends JPanel implements ActionListener{
 		gameStart.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				Pong.pongFrame.setContentPane(new MainGame());
+				Pong.pongFrame.setContentPane(new MainGame(twoPlayers));
 				Pong.pongFrame.getContentPane().requestFocus();
 			}
 		});

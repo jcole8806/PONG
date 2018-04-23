@@ -1,6 +1,6 @@
 //TODO Add powerups
-//TODO Add two player functionality
 //TODO Add sound effects
+//TODO Modify angle of deflection for ball to make game more fun
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,23 +17,30 @@ import javax.swing.Timer;
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Timer timer = new Timer(10, this);
-	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0;
-	private boolean paddleMoving = false, tangible = true;
+	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0, paddle2Direction;
+	private boolean paddleMoving = false, tangible = true, twoHumans, paddle2Moving = false;
 	private Ball ball;
 	private Paddle paddle, compPaddle;
 	private HumanPlayer human;
-	private ComputerPlayer comp;
+	private Player comp;
 	private Game game;
 	
-	public MainGame() {
-		game = new Game();
+	public MainGame(boolean twoHumans) {
+		if(!twoHumans) {
+			game = new Game();
+			comp = (ComputerPlayer) game.getPlayer2();
+		} else {
+			game = new Game(new HumanPlayer(), new HumanPlayer());
+			comp = (HumanPlayer) game.getPlayer2();
+		}
 		ball = game.getBall();
 		human = (HumanPlayer) game.getPlayer1();
 		human.initPaddle(Paddle.LEFT);
-		comp = (ComputerPlayer) game.getPlayer2();
+		
 		comp.initPaddle(Paddle.RIGHT);
 		paddle = human.getPaddle();
 		compPaddle = comp.getPaddle();
+		this.twoHumans = twoHumans;
 		
 		setFocusable(true);
 		setSize(Pong.screenSize);
@@ -62,7 +69,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if (ball.x < paddle.xPos + paddle.width - ballXSpeed || ball.x > compPaddle.xPos + compPaddle.width + ballXSpeed)
 			tangible = false;
 		if(ball.y >= paddle.yPos - ball.size && ball.y <= paddle.yPos + paddle.size && tangible) {
-			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/20;
+			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/10;
 			return true;
 		}
 		return false;
@@ -83,11 +90,23 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 				tangible = true;
 				ballXSpeed = 5;
 		}
+		
+		if(twoHumans && (e.getKeyCode() == 38 || e.getKeyCode() == 40)) {
+			paddle2Moving = true;
+			if(ballXSpeed == 0)
+				ballXSpeed = 5;
+			if(e.getKeyCode() == 38)
+				paddle2Direction = -1;
+			else if(e.getKeyCode() == 40)
+				paddle2Direction = 1;
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 87 || e.getKeyCode() == 83)
 			paddleMoving = false;
+		if(e.getKeyCode() == 38 || e.getKeyCode() == 40)
+			paddle2Moving = false;
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -97,10 +116,13 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 158)))
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
+		if(paddle2Moving && ((paddle2Direction == -1 && compPaddle.yPos > 10) ||(paddle2Direction == 1 && compPaddle.yPos < Pong.screenSize.height - 158)) && twoHumans)
+			compPaddle.yPos = compPaddle.yPos + paddleSpeed*paddle2Direction;
+		
 		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
 		else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size)
-				ballDirection *= -1;
+			ballDirection *= -1;
 		
 		i++;
 		if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
@@ -129,9 +151,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 		if(player1Score == 11 || player2Score == 11) {
 			if(player1Score == 11)
-				Pong.pongFrame.setContentPane(new Winner(1));
+				Pong.pongFrame.setContentPane(new Winner(1, twoHumans));
 			else if(player2Score == 11)
-				Pong.pongFrame.setContentPane(new Winner(2));
+				Pong.pongFrame.setContentPane(new Winner(2, twoHumans));
 			Pong.pongFrame.remove(this);
 			player1Score = 0;
 			player2Score = 0;
