@@ -1,7 +1,6 @@
 //TODO Add powerups
 //TODO Add two player functionality
 //TODO Add sound effects
-//Test
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -96,7 +95,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 75)))
+		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 158)))
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
 		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle())
 			ballDirection *= -1;
