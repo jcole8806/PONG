@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+//test
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Timer timer = new Timer(10, this);
@@ -24,6 +24,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private HumanPlayer human;
 	private Player comp;
 	private Game game;
+	private PowerUp power;
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
@@ -41,6 +42,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		paddle = human.getPaddle();
 		compPaddle = comp.getPaddle();
 		this.twoHumans = twoHumans;
+		//power = new PowerUp();
 		
 		setFocusable(true);
 		setSize(Pong.screenSize);
@@ -57,12 +59,14 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		paddle.paint(g);
 		compPaddle.paint(g);
 		ball.paint(g);
+		
+		
 		for(int i = 0; i <= 47; i++)
 			g.fillRect(Pong.screenSize.width/2 - 5, 18 * i, 10, 12);
 		g.setFont(new Font("Comic Sans", 1, 100));
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
-		
+		//power.paint(g);
 	}
 	
 	private boolean hitPaddle() {
@@ -159,5 +163,6 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			player2Score = 0;
 		}
 	}
+	
 	
 }
