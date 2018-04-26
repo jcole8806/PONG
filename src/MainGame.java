@@ -9,7 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -117,17 +121,30 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	
+	private void playSound() {
+		   try {
+		    	  File soundFile = new File("audio/blip.wav");
+		    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);              
+		    	  Clip clip = AudioSystem.getClip();
+		    	  clip.open(audioIn);
+		    	  clip.start();
+		      } catch (Exception e) {}
+	   }
+
+	
 	public void actionPerformed(ActionEvent e) {
 		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 158)))
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
 		if(paddle2Moving && ((paddle2Direction == -1 && compPaddle.yPos > 10) ||(paddle2Direction == 1 && compPaddle.yPos < Pong.screenSize.height - 158)) && twoHumans)
 			compPaddle.yPos = compPaddle.yPos + paddleSpeed*paddle2Direction;
 		
-		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle())
+		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()){
 			ballDirection *= -1;
-		else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size)
+			playSound();
+		}else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size){
 			ballDirection *= -1;
-		
+			playSound();
+		}
 		i++;
 		if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
 			ballXSpeed++;
