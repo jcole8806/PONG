@@ -1,5 +1,4 @@
 //TODO Add powerups
-//TODO Add sound effects
 //TODO Modify angle of deflection for ball to make game more fun
 import java.awt.Color;
 import java.awt.Font;
