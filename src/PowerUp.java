@@ -28,9 +28,10 @@ public class PowerUp extends Rectangle implements ActionListener{
 	public PowerUp() {
 		Random rand = new Random();
 		color = colors[rand.nextInt(colors.length) + 0];
+		//x = setRandXLocation();
+		//y = setRandYLocation();
 		size = 20;
 		timer.start();
-		
 	}
 	
 	public Color getColor() {
@@ -47,6 +48,16 @@ public class PowerUp extends Rectangle implements ActionListener{
 		y = 10 + (int) Math.random() * (Pong.screenSize.height - 20);
 	}
 	
+//	public int setRandXLocation(){
+//		x = 10 + (int) Math.random() * (Pong.screenSize.width - 20);
+//		return x;
+//	}
+//	
+//	public int setRandYLocation(){
+//		y = 10 + (int) Math.random() * (Pong.screenSize.height - 20);
+//		return y;
+//	}
+	
 	public int getX(int x){
 		return x;
 	}
@@ -58,8 +69,9 @@ public class PowerUp extends Rectangle implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		if(timer.getDelay() == 10){
 			setRandLocation();
-			
+			//System.out.println("gets here");
 		}
+		
 	}
 	
 	
