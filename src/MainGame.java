@@ -27,7 +27,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private HumanPlayer human;
 	private Player comp;
 	private Game game;
-	//private PowerUp power;
+	private PowerUp power;
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
@@ -45,7 +45,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		paddle = human.getPaddle();
 		compPaddle = comp.getPaddle();
 		this.twoHumans = twoHumans;
-		//power = new PowerUp();
+		power = new PowerUp();
 		
 		setFocusable(true);
 		setSize(Pong.screenSize);
@@ -70,7 +70,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
 		
-		//power.paint(g);
+		power.paint(g);
 	}
 	
 	private boolean hitPaddle() {
