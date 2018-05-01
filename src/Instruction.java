@@ -15,15 +15,22 @@ public class Instruction extends JPanel implements ActionListener{
 	private Dimension panelSize;
 	
 	public Instruction(boolean twoPlayers) {
-		
+		setLayout(null);
 		setBackground(Color.BLACK);
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		//setSize(panelSize);
 		setLayout(new BorderLayout());
-		JTextArea instructions = new JTextArea(	" Instructions: Use the up and down arrow keys on the keyboard"
+		JTextArea instructions = new JTextArea(	" Instructions: Use the W and S keys on the keyboard"
 				+ " to move your paddle. The objective of the game is to block the ball from passing off "
 				+ "the screen from your side, and instead trying to get the ball to pass off the screen"
 				+ "from the other side.");
+		JLabel controls = new JLabel("Player 1 Controls: W and S");
+		//controls.setBounds(200, y, width, height);
+		JLabel controls2;
+		if(twoPlayers) {
+			controls2 = new JLabel("Player 2 Controls: Up and Down Arrow Keys");
+			controls2.setBounds(500, 500, 300, 300);
+		}	
 		instructions.setEditable(false);
 		instructions.setFocusable(false);
 		instructions.setWrapStyleWord(true);
