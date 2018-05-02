@@ -129,7 +129,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		    	  Clip clip = AudioSystem.getClip();
 		    	  clip.open(audioIn);
 		    	  clip.start();
-		      } catch (Exception e) {}
+		   } catch (Exception e) {}
 	   }
 
 	

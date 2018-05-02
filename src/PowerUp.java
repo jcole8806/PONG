@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class PowerUp extends Rectangle implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
-	private Timer timer = new Timer(1,this);
+	private Timer timer = new Timer(10000,this);
 	private Color color;
 	private int size = 20;
 	private Random rand = new Random();
