@@ -21,17 +21,14 @@ import javax.swing.Timer;
 public class PowerUp extends Rectangle implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
-	private Timer timer = new Timer(10,this);
+	private Timer timer = new Timer(1,this);
 	private Color color;
-	private int size, x, y;
+	private int size = 20;
+	private Random rand = new Random();
 	
 	public PowerUp() {
-		Random rand = new Random();
-		color = colors[rand.nextInt(colors.length) + 0];
-		//setRandLocation();
-		size = 20;
+		setRand();
 		timer.start();
-		this.setLocation(10 + (int) Math.random() * (Pong.screenSize.width - 20), 10 + (int) Math.random() * (Pong.screenSize.height - 20));
 	}
 	
 	public Color getColor() {
@@ -43,35 +40,13 @@ public class PowerUp extends Rectangle implements ActionListener{
 	    g.fillRect(x, y, size, size);
 	}
 	
-	public void setRandLocation(){
-		x = 10 + (int) Math.random() * (Pong.screenSize.width - 20);
-		y = 10 + (int) Math.random() * (Pong.screenSize.height - 20);
-	}
-	
-//	public int setRandXLocation(){
-//		x = 10 + (int) Math.random() * (Pong.screenSize.width - 20);
-//		return x;
-//	}
-//	
-//	public int setRandYLocation(){
-//		y = 10 + (int) Math.random() * (Pong.screenSize.height - 20);
-//		return y;
-//	}
-	
-	public int getX(int x){
-		return x;
-	}
-	
-	public int getY(int y){
-		return y;
+	public void setRand() {
+		this.setLocation(10 + (int) 10 + (int) (Math.random() * (Pong.screenSize.width - 20)), 10 + (int) 10 + (int) (Math.random() * (Pong.screenSize.height - 20)));
+		color = colors[rand.nextInt(colors.length)];
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		if(timer.getDelay() == 10){
-			setRandLocation();
-			//System.out.println("gets here");
-		}
-		
+		setRand();
 	}
 	
 	

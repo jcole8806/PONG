@@ -1,5 +1,6 @@
 //TODO Add powerups
 //TODO Modify angle of deflection for ball to make game more fun
+//TODO Have timer stop when point is scored and resume when space bar is pressed
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -146,7 +147,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			playSound();
 		}
 		i++;
-		if(i % 100 == 0 && ballXSpeed < 100 && ballXSpeed > 0)
+		if(i % 100 == 0 && ballXSpeed < 50 && ballXSpeed > 0)
 			ballXSpeed++;
 
 		ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
@@ -161,7 +162,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			player2Score++;
 			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
-		} else if(ball.x >= Pong.screenSize.width) {
+		} else if(ball.x >= Pong.screenSize.width - 50) {
 			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
