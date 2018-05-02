@@ -14,7 +14,7 @@ public class Instruction extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Dimension panelSize;
 	
-	public Instruction(boolean twoPlayers) {
+	public Instruction(final boolean twoPlayers) {
 		setLayout(null);
 		setBackground(Color.BLACK);
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);

@@ -27,7 +27,7 @@ public class ComputerPlayer extends Player implements LocationListener{
 				this.paddle.yPos-=1*dir;
 			
 			if(event.getY() > this.getPaddle().yPos){
-				//while(this.getPaddle().yPos != event.getY()){  Uncomment lines below to get an impossible AI
+				//while(this.getPaddle().yPos != event.getY()){  //Uncomment lines below to get an impossible AI
 					this.paddle.yPos++;
 				//}
 			}else if(event.getY() < this.getPaddle().yPos){

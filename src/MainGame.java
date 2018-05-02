@@ -88,7 +88,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			paddleMoving = true;
 			tangible = true;
 			if(ballXSpeed == 0){
-				ballXSpeed = 5;
+				//ballXSpeed = 5;
 			}
 			if(e.getKeyCode() == 87)
 				paddleDirection = -1;
