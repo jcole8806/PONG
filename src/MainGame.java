@@ -29,6 +29,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private Player comp;
 	private Game game;
 	private PowerUp power;
+	private Rectangle range;
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
@@ -70,6 +71,13 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.setFont(new Font("Comic Sans", 1, 100));
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
+		
+		
+		g.drawRect(0, power.y, Pong.screenSize.width, 1);
+		g.drawRect(0, power.y + 20, Pong.screenSize.width, 1);
+		g.drawRect(power.x, 0, 1, Pong.screenSize.height);
+		g.drawRect(power.x + 20, 0, 1, Pong.screenSize.height);
+		g.drawRect(range.x, range.y, range.width, range.height);
 		
 		power.paint(g);
 	}
@@ -131,7 +139,16 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		    	  clip.open(audioIn);
 		    	  clip.start();
 		   } catch (Exception e) {}
-	   }
+	}
+	
+	private boolean powerUpHit() {
+		range = new Rectangle(power.x - ballXSpeed, power.y - Math.abs(ballYVelocity), power.width + ballXSpeed, power.height + Math.abs(ballYVelocity));
+		
+		if(power.y + power.height >= ball.y && power.y <= ball.y + ball.size) {
+			return true;
+		}
+			return false;
+	}
 
 	
 	public void actionPerformed(ActionEvent e) {
@@ -183,6 +200,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			player1Score = 0;
 			player2Score = 0;
 		}
+		
+		if(powerUpHit())
+			System.out.println("Test");
 	}
 	
 	
