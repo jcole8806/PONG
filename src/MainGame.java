@@ -97,6 +97,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 				paddleDirection = 1;
 		}	else if(e.getKeyCode() == 32 && ballXSpeed == 0) {
 				tangible = true;
+				power.gameStart = true;
 				ballXSpeed = 5;
 		}
 		
@@ -159,6 +160,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ball.setLocation(Pong.screenSize.width/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
+			power.gameStart = false;
 			player2Score++;
 			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
@@ -166,6 +168,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
 			ballXSpeed = 0;
 			ballYVelocity = 0;
+			power.gameStart = false;
 			player1Score++;
 			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
