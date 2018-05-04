@@ -146,6 +146,31 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			
 		return false;
 	}
+	
+	private void gameOver() {
+		if(player1Score == 11)
+			Pong.pongFrame.setContentPane(new Winner(1, twoHumans));
+		else if(player2Score == 11)
+			Pong.pongFrame.setContentPane(new Winner(2, twoHumans));
+		Pong.pongFrame.remove(this);
+		player1Score = 0;
+		player2Score = 0;
+	}
+	
+	private void pointScored() {
+		if(ball.x <= 0) {
+			ball.setLocation(Pong.screenSize.width/4, Pong.screenSize.height/2);
+			player2Score++;
+		} else if(ball.x >= Pong.screenSize.width - 50) {
+			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
+			player1Score++;
+		}
+		ballXSpeed = 0;
+		ballYVelocity = 0;
+		paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
+		compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
+		power.gameStart = false;
+	}
 
 	
 	public void actionPerformed(ActionEvent e) {
@@ -154,14 +179,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(paddle2Moving && ((paddle2Direction == -1 && compPaddle.yPos > 10) ||(paddle2Direction == 1 && compPaddle.yPos < Pong.screenSize.height - 158)) && twoHumans)
 			compPaddle.yPos = compPaddle.yPos + paddleSpeed*paddle2Direction;
 		
-		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()){
+		if(((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()) || (ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size))
 			ballDirection *= -1;
-			//playSound();
-		}else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size){
-			ballDirection *= -1;
-			//playSound();
-		}
+		
 		i++;
+		
 		if(i % 100 == 0 && ballXSpeed < 50 && ballXSpeed > 0)
 			ballXSpeed++;
 
@@ -170,37 +192,14 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(ball.y <= 10 || ball.y >= Pong.screenSize.height - 75)
 			ballYVelocity *= -1;
 		
-		if(ball.x <= 0) {
-			ball.setLocation(Pong.screenSize.width/4, Pong.screenSize.height/2);
-			ballXSpeed = 0;
-			ballYVelocity = 0;
-			power.gameStart = false;
-			player2Score++;
-			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
-			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
-		} else if(ball.x >= Pong.screenSize.width - 50) {
-			ball.setLocation(Pong.screenSize.width*3/4, Pong.screenSize.height/2);
-			ballXSpeed = 0;
-			ballYVelocity = 0;
-			power.gameStart = false;
-			player1Score++;
-			paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
-			compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
-		}
+		if(ball.x <= 0 || ball.x >= Pong.screenSize.width - 50)
+			pointScored();
 		
-		if(player1Score == 11 || player2Score == 11) {
-			if(player1Score == 11)
-				Pong.pongFrame.setContentPane(new Winner(1, twoHumans));
-			else if(player2Score == 11)
-				Pong.pongFrame.setContentPane(new Winner(2, twoHumans));
-			Pong.pongFrame.remove(this);
-			player1Score = 0;
-			player2Score = 0;
-		}
+		if(player1Score == 11 || player2Score == 11)
+			gameOver();
 		
 		if(powerUpHit())
 			System.out.println("Test");
 	}
-	
-	
+		
 }
