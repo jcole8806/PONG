@@ -25,10 +25,14 @@ public class PowerUp extends Rectangle implements ActionListener{
 	private Color color;
 	private int size = 20;
 	private Random rand = new Random();
+	public boolean gameStart;
 	
 	public PowerUp() {
 		setRand();
-		timer.start();
+		//if(gameStart){
+			timer.start();
+		//}
+		
 	}
 	
 	public Color getColor() {
@@ -47,6 +51,17 @@ public class PowerUp extends Rectangle implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		setRand();
+		if(color != null){
+			if(color == Color.RED){
+				
+			}else if(color == Color.YELLOW){
+				
+			}else if(color == Color.BLUE){
+				
+			}else if(color == Color.GREEN){
+				
+			}
+		}
 	}
 	
 	
