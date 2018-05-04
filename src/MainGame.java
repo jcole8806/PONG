@@ -29,7 +29,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private Player comp;
 	private Game game;
 	private PowerUp power;
-	private Rectangle range;
+	private Rectangle range = new Rectangle(0, 0, 0, 0);
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
@@ -72,11 +72,6 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
 		
-		
-		g.drawRect(0, power.y, Pong.screenSize.width, 1);
-		g.drawRect(0, power.y + 20, Pong.screenSize.width, 1);
-		g.drawRect(power.x, 0, 1, Pong.screenSize.height);
-		g.drawRect(power.x + 20, 0, 1, Pong.screenSize.height);
 		g.drawRect(range.x, range.y, range.width, range.height);
 		
 		power.paint(g);
@@ -130,7 +125,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	
-	private void playSound() {
+	/*private void playSound() {
 		   try {
 		    	  File soundFile = new File("audio/blip.wav");
 		    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);              
@@ -139,14 +134,16 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		    	  clip.start();
 		   } catch (Exception e) {}
 	}
-	
+	*/
 	private boolean powerUpHit() {
-		range = new Rectangle(power.x - ballXSpeed, power.y - Math.abs(ballYVelocity), power.width + ballXSpeed, power.height + Math.abs(ballYVelocity));
+		range = new Rectangle(power.x - ballXSpeed, power.y - Math.abs(ballYVelocity), 20 + ballXSpeed * 2, 20 + Math.abs(ballYVelocity)*2);
 		
-		if(power.y + power.height >= ball.y && power.y <= ball.y + ball.size) {
+		if(range.intersects(ball.getBounds())) {
+			power.setLocation(-20, -20);
 			return true;
 		}
-			return false;
+			
+		return false;
 	}
 
 	
@@ -158,10 +155,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 		if((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()){
 			ballDirection *= -1;
-			playSound();
+			//playSound();
 		}else if(ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size){
 			ballDirection *= -1;
-			playSound();
+			//playSound();
 		}
 		i++;
 		if(i % 100 == 0 && ballXSpeed < 50 && ballXSpeed > 0)
@@ -170,7 +167,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		ball.setLocation(ball.x + ballXSpeed*ballDirection, ball.y + ballYVelocity);
 		
 		if(ball.y <= 10 || ball.y >= Pong.screenSize.height - 75)
-			ballYVelocity*= -1;
+			ballYVelocity *= -1;
 		
 		if(ball.x <= 0) {
 			ball.setLocation(Pong.screenSize.width/4, Pong.screenSize.height/2);
