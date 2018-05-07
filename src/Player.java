@@ -1,14 +1,8 @@
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Player{
 	
 	protected Paddle paddle;
 	private int score = 0;
-	
-	public Player() {
-		
-	}
 	
 	public void movePaddle(int dir) {
 		if(dir >= 1){

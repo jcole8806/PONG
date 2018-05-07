@@ -1,5 +1,4 @@
 //TODO Add powerups
-//TODO Modify angle of deflection for ball to make game more fun
 //TODO Have timer stop when point is scored and resume when space bar is pressed
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +16,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-//test
+
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Timer timer = new Timer(10, this);
@@ -65,14 +64,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		compPaddle.paint(g);
 		ball.paint(g);
 		
-		
 		for(int i = 0; i <= 47; i++)
 			g.fillRect(Pong.screenSize.width/2 - 5, 18 * i, 10, 12);
 		g.setFont(new Font("Comic Sans", 1, 100));
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
-		
-		g.drawRect(range.x, range.y, range.width, range.height);
 		
 		power.paint(g);
 	}
@@ -172,6 +168,18 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		power.gameStart = false;
 	}
+	
+	private void powerUp() {
+		if(power.getColor() == Color.RED) {
+			ballXSpeed *= 2;
+		} else if (power.getColor() == Color.YELLOW) {
+			
+		} else if (power.getColor() == Color.BLUE) {
+			
+		} else if (power.getColor() == Color.GREEN) {
+			
+		}
+	}
 
 	
 	public void actionPerformed(ActionEvent e) {
@@ -205,7 +213,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			gameOver();
 		
 		if(powerUpHit())
-			System.out.println("Test");
+			powerUp();
 	}
 		
 }

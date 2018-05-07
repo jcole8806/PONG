@@ -8,7 +8,7 @@
  * The powerup only lasts a small amount of time
  */
 
-//TODO select random position
+//TODO Add effects for powerups
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -21,9 +21,9 @@ import javax.swing.Timer;
 public class PowerUp extends Rectangle implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
-	private Timer timer = new Timer(10000,this);
+	private Timer timer = new Timer(10,this);
 	private Color color;
-	private int size = 20;
+	private int size = 20, i = 0;
 	private Random rand = new Random();
 	public boolean gameStart;
 	
@@ -45,11 +45,13 @@ public class PowerUp extends Rectangle implements ActionListener{
 	}
 	
 	public void setRand() {
-		this.setLocation(10 + (int) 10 + (int) (Math.random() * (Pong.screenSize.width - 20)), 10 + (int) 10 + (int) (Math.random() * (Pong.screenSize.height - 20)));
+		if(i % 10000 == 0)
+			this.setLocation(100 + (int) (Math.random() * (Pong.screenSize.width - 20)), 100 + (int) (Math.random() * (Pong.screenSize.height - 20)));
 		color = colors[rand.nextInt(colors.length)];
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
+		i++;
 		setRand();
 		if(color != null){
 			if(color == Color.RED){
