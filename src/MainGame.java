@@ -78,7 +78,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	private boolean hitPaddle() {
-		if (ball.x < paddle.xPos + paddle.width - ballXSpeed || ball.x > compPaddle.xPos + compPaddle.width + ballXSpeed)
+		if (ball.x < paddle.xPos + paddle.width - ballXSpeed || ball.x + ball.size > compPaddle.xPos)
 			tangible = false;
 		if(ball.y >= paddle.yPos - ball.size && ball.y <= paddle.yPos + paddle.size && tangible) {
 			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/10;
@@ -136,6 +136,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		   } catch (Exception e) {}
 	}
 	*/
+	
 	private boolean powerUpHit() {
 		range = new Rectangle(power.x - ballXSpeed, power.y - Math.abs(ballYVelocity), 20 + ballXSpeed * 2, 20 + Math.abs(ballYVelocity)*2);
 		
@@ -176,11 +177,16 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 158)))
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
+		
 		if(paddle2Moving && ((paddle2Direction == -1 && compPaddle.yPos > 10) ||(paddle2Direction == 1 && compPaddle.yPos < Pong.screenSize.height - 158)) && twoHumans)
 			compPaddle.yPos = compPaddle.yPos + paddleSpeed*paddle2Direction;
 		
-		if(((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()) || (ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size))
+		if(((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()))
 			ballDirection *= -1;
+		else if ((ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size)) {
+			ballYVelocity = (ball.y - (compPaddle.yPos + compPaddle.size/2))/10;
+			ballDirection *= -1;
+		}
 		
 		i++;
 		
