@@ -6,6 +6,7 @@ import java.awt.*;
  * 	- How fast the computer's paddle moves depends on difficulty (easy, intermediate, hard)
  */
 
+//TODO Have paddle track ball to center of paddle, and track center of ball, not corner
 
 public class ComputerPlayer extends Player implements LocationListener{
 
