@@ -1,5 +1,6 @@
 //TODO Have timer stop when point is scored and resume when space bar is pressed
 //TODO Move powerup stuff to PowerUp class
+//TODO Fix powerups to effect the right player
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,7 +23,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Timer timer = new Timer(10, this);
 	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0, paddle2Direction;
-	private boolean paddleMoving = false, tangible = true, twoHumans, paddle2Moving = false;
+	private boolean paddleMoving = false, tangible = true, twoHumans, paddle2Moving = false, powerUpActive = false;
 	private Ball ball;
 	private Paddle paddle, compPaddle;
 	private HumanPlayer human;
@@ -73,6 +74,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
 		
 		power.paint(g);
+		
+		if(powerUpActive) {
+			//Might put stuff for announcements here until that gets working
+		}
 	}
 	
 	private boolean hitPaddle() {
@@ -185,12 +190,14 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		} else if (power.getColor() == Color.GREEN) {
 			paddle.size = 200;
 		}
+		powerUpActive = true;
 	}
 	
 	private void clearEffects() {
 		paddleSpeed = 5;
 		paddle.size = 100;
 		getGraphics().drawString("TEXT", 100, 100);
+		powerUpActive = false;
 	}
 
 	
