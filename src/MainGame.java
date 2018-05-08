@@ -1,5 +1,6 @@
-//TODO Add powerups
 //TODO Have timer stop when point is scored and resume when space bar is pressed
+//TODO Move powerup stuff to PowerUp class
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -55,6 +56,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		timer.start();
+		
 	}
 	
 	public void paint(Graphics g) {
@@ -169,6 +171,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		paddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
 		power.gameStart = false;
+		clearEffects();
 	}
 	
 	private void powerUp() {
@@ -180,8 +183,14 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		} else if (power.getColor() == Color.BLUE) {
 			ballXSpeed *= .5;
 		} else if (power.getColor() == Color.GREEN) {
-			paddle.size = 40;
+			paddle.size = 200;
 		}
+	}
+	
+	private void clearEffects() {
+		paddleSpeed = 5;
+		paddle.size = 100;
+		getGraphics().drawString("TEXT", 100, 100);
 	}
 
 	

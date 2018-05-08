@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class Instruction extends JPanel implements ActionListener{
 	public Instruction(final boolean twoPlayers) {
 		setLayout(null);
 		setBackground(Color.BLACK);
+		//setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		//setSize(panelSize);
 		setLayout(new BorderLayout());

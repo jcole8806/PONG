@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -20,6 +21,7 @@ public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
+		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		
 		for(int i = 0; i < buttons.length; i++) {
 			buttons[i] = new JButton(buttonTexts[i]);

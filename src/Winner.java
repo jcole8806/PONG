@@ -19,6 +19,7 @@ public class Winner extends JPanel implements ActionListener{
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setSize(Pong.screenSize);
+		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		
 		for(int i = 0; i < options.length; i++) {
 			options[i] = new JButton(optionTexts[i]);

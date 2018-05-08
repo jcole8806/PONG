@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		setFocusable(true);
 		setLayout(null);
 		setBackground(Color.BLACK);
+		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		Dimension panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		setSize(panelSize);
 		
