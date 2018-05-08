@@ -45,7 +45,7 @@ public class PowerUp extends Rectangle implements ActionListener{
 	}
 	
 	public void setRand() {
-		if(i % 10000 == 0)
+		if(i % 1000 == 0)
 			this.setLocation(100 + (int) (Math.random() * (Pong.screenSize.width - 20)), 100 + (int) (Math.random() * (Pong.screenSize.height - 20)));
 		color = colors[rand.nextInt(colors.length)];
 	}

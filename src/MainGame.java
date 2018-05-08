@@ -77,7 +77,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if (ball.x < paddle.xPos + paddle.width - ballXSpeed || ball.x + ball.size > compPaddle.xPos)
 			tangible = false;
 		if(ball.y >= paddle.yPos - ball.size && ball.y <= paddle.yPos + paddle.size && tangible) {
-			ballYVelocity = (ball.y - (paddle.yPos + paddle.size/2))/10;
+			ballYVelocity = (ball.y + ball.size/2 - (paddle.yPos + paddle.size/2))/10;
 			return true;
 		}
 		return false;
@@ -102,8 +102,10 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 		if(twoHumans && (e.getKeyCode() == 38 || e.getKeyCode() == 40)) {
 			paddle2Moving = true;
-			if(ballXSpeed == 0)
+			if(ballXSpeed == 0) {
 				ballXSpeed = 5;
+				tangible = true;
+			}
 			if(e.getKeyCode() == 38)
 				paddle2Direction = -1;
 			else if(e.getKeyCode() == 40)
@@ -173,11 +175,12 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(power.getColor() == Color.RED) {
 			ballXSpeed *= 2;
 		} else if (power.getColor() == Color.YELLOW) {
-			
+			if(ballXSpeed > 0)
+				paddleSpeed = 20;
 		} else if (power.getColor() == Color.BLUE) {
-			
+			ballXSpeed *= .5;
 		} else if (power.getColor() == Color.GREEN) {
-			
+			paddle.size = 40;
 		}
 	}
 
@@ -192,7 +195,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(((ball.x - (paddle.xPos + 20) <= 0) && hitPaddle()))
 			ballDirection *= -1;
 		else if ((ball.x > compPaddle.xPos && ball.y >= compPaddle.yPos - ball.size && ball.y <= compPaddle.yPos + compPaddle.size)) {
-			ballYVelocity = (ball.y - (compPaddle.yPos + compPaddle.size/2))/10;
+			ballYVelocity = (ball.y + ball.size/2 - (compPaddle.yPos + compPaddle.size/2))/10;
 			ballDirection *= -1;
 		}
 		
