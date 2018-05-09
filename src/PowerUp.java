@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class PowerUp extends Rectangle implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
-	private Timer timer = new Timer(10,this);
+	private Timer timer = new Timer(1000,this);
 	private Color color;
 	private int size = 20, i = 0;
 	private Random rand = new Random();
@@ -45,8 +45,11 @@ public class PowerUp extends Rectangle implements ActionListener{
 	}
 	
 	public void setRand() {
+		int x = 400 + (int) (Math.random() * (Pong.screenSize.width - 400));
+		int y = 100 + (int) (Math.random() * (Pong.screenSize.height - 200));
 		if(i % 1000 == 0)
-			this.setLocation(100 + (int) (Math.random() * (Pong.screenSize.width - 20)), 100 + (int) (Math.random() * (Pong.screenSize.height - 20)));
+			this.setLocation(x,y);
+		//System.out.println(x + "," + y);
 		color = colors[rand.nextInt(colors.length)];
 	}
 	
