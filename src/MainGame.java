@@ -206,6 +206,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private void clearEffects() {
 		paddleSpeed = 5;
 		paddle.size = 100;
+		compPaddle.size = 100;
 		getGraphics().drawString("TEXT", 100, 100);
 		powerUpActive = false;
 	}
