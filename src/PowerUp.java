@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 public class PowerUp extends Rectangle implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
+	private Color[] colors = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN, Color.ORANGE};
 	private Timer timer = new Timer(10,this);
 	private Color color;
 	private int size = 20, i = 0;
