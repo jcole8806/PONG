@@ -1,6 +1,5 @@
 //TODO Have timer stop when point is scored and resume when space bar is pressed
 //TODO Move powerup stuff to PowerUp class
-//TODO Fix powerups to effect the right player
 
 import java.awt.Color;
 import java.awt.Font;
@@ -184,11 +183,22 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballXSpeed *= 2;
 		} else if (power.getColor() == Color.YELLOW) {
 			if(ballXSpeed > 0)
-				paddleSpeed = 20;
+				paddleSpeed = 15;
 		} else if (power.getColor() == Color.BLUE) {
 			ballXSpeed *= .5;
 		} else if (power.getColor() == Color.GREEN) {
-			paddle.size = 200;
+			if(ballXSpeed > 0) {
+				paddle.size = 200;
+				paddle.setY(Pong.screenSize.height/2 - paddle.size/2);
+			} else {
+				compPaddle.size = 200;
+				compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
+			}	
+		} else if (power.getColor() == Color.ORANGE) {
+			if(ballXSpeed > 0)
+				compPaddle.size /= 2;
+			else
+				paddle.size /= 2;
 		}
 		powerUpActive = true;
 	}
