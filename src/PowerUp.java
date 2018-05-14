@@ -45,11 +45,12 @@ public class PowerUp extends Rectangle implements ActionListener{
 	}
 	
 	public void setRand() {
-		int x = 400 + (int) (Math.random() * (Pong.screenSize.width - 400));
-		int y = 100 + (int) (Math.random() * (Pong.screenSize.height - 200));
-		if(i % 1000 == 0)
+		int x = 40 + (int) (Math.random() * (Pong.screenSize.width - 400));
+		int y = 20 + (int) (Math.random() * (Pong.screenSize.height - 200));
+		if(i % 1000 == 0){
 			this.setLocation(x,y);
-		//System.out.println(x + "," + y);
+			System.out.println(x + "," + y);
+		}	
 		color = colors[rand.nextInt(colors.length)];
 	}
 	

@@ -30,6 +30,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private Game game;
 	private PowerUp power;
 	private Rectangle range = new Rectangle(0, 0, 0, 0);
+	private boolean playerHit = false;
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
