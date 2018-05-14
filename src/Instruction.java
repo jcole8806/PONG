@@ -23,9 +23,9 @@ public class Instruction extends JPanel implements ActionListener{
 		//setSize(panelSize);
 		setLayout(new BorderLayout());
 		JTextArea instructions = new JTextArea(	" Instructions: Use the W and S keys on the keyboard"
-				+ " to move your paddle. The objective of the game is to block the ball from passing off "
-				+ "the screen from your side, and instead trying to get the ball to pass off the screen"
-				+ "from the other side.");
+				+ " to move your paddle. \n The objective of the game is to block the ball from passing off "
+				+ "the screen from your side, and instead trying to get the ball to pass off the screen "
+				+ " from the other side which would either be the second player or the computer player's side.");
 		JLabel controls = new JLabel("Player 1 Controls: W and S");
 		//controls.setBounds(200, y, width, height);
 		JLabel controls2;
@@ -37,7 +37,7 @@ public class Instruction extends JPanel implements ActionListener{
 		instructions.setFocusable(false);
 		instructions.setWrapStyleWord(true);
 		instructions.setLineWrap(true);
-		instructions.setFont(instructions.getFont().deriveFont(20.0f));
+		instructions.setFont(instructions.getFont().deriveFont(25.0f));
 		instructions.setForeground(Color.WHITE);
 		instructions.setBackground(Color.BLACK);
 		
