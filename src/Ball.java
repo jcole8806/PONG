@@ -21,7 +21,7 @@ public class Ball {
         this.game = game;
         ballColor = Color.white;
         x = 800;
-        y = 400;
+        y = 390;
         initBall();
     }
 
