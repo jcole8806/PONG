@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	private Timer timer = new Timer(10, this);
-	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0, paddle2Direction;
+	private int ballDirection = -1, paddleDirection, ballXSpeed = 0, ballYVelocity = 0, paddleSpeed = 5, i = 0, player1Score = 0, player2Score = 0, paddle2Direction, powerPlayer;
 	private boolean paddleMoving = false, tangible = true, twoHumans, paddle2Moving = false, powerUpActive = false;
 	private Ball ball;
 	private Paddle paddle, compPaddle;
@@ -31,6 +31,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private PowerUp power;
 	private Rectangle range = new Rectangle(0, 0, 0, 0);
 	private boolean playerHit = false;
+	private Color currentPower;
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
@@ -77,7 +78,27 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 		if(powerUpActive) {
 			//Might put stuff for announcements here until that gets working
+			g.setColor(power.getColor());
+			g.setFont(new Font("Comic Sans", 1, 40));
+			if(powerPlayer == 1)
+				g.drawString(powerString(), Pong.screenSize.width/4 - g.getFontMetrics().stringWidth(powerString())/2, 200);
+			else
+				g.drawString(powerString(), (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth(powerString())/2, 200);
 		}
+	}
+	
+	private String powerString() {
+		if(currentPower == Color.RED)
+			return "Ball Speed +";
+		else if(currentPower == Color.YELLOW)
+			return "Paddle Speed +";
+		else if(currentPower == Color.BLUE)
+			return "Ball Speed -";
+		else if(currentPower == Color.GREEN)
+			return "Paddle Size +";
+		else if(currentPower == Color.ORANGE)
+			return "Opponent Size -";
+		return "";
 	}
 	
 	private boolean hitPaddle() {
@@ -180,10 +201,16 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	private void powerUp() {
+		currentPower = power.getColor();
+		if(ballDirection == 1)
+			powerPlayer = 1;
+		else
+			powerPlayer = 2;
+		
 		if(power.getColor() == Color.RED) {
 			ballXSpeed *= 2;
 		} else if (power.getColor() == Color.YELLOW) {
-			if(ballXSpeed > 0)
+			if(ballDirection == 1)
 				paddleSpeed = 13;
 		} else if (power.getColor() == Color.BLUE) {
 			ballXSpeed *= .5;
@@ -208,8 +235,8 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		paddleSpeed = 5;
 		paddle.size = 100;
 		compPaddle.size = 100;
-		getGraphics().drawString("TEXT", 100, 100);
 		powerUpActive = false;
+		currentPower = null;
 	}
 
 	
