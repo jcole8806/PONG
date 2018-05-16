@@ -184,19 +184,19 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			ballXSpeed *= 2;
 		} else if (power.getColor() == Color.YELLOW) {
 			if(ballXSpeed > 0)
-				paddleSpeed = 15;
+				paddleSpeed = 13;
 		} else if (power.getColor() == Color.BLUE) {
 			ballXSpeed *= .5;
 		} else if (power.getColor() == Color.GREEN) {
-			if(ballXSpeed > 0) {
+			if(ballDirection == 1) {
 				paddle.size = 200;
-				paddle.setY(Pong.screenSize.height/2 - paddle.size/2);
+				paddle.setY(paddle.yPos - 50);
 			} else {
 				compPaddle.size = 200;
-				compPaddle.setY(Pong.screenSize.height/2 - compPaddle.size/2);
+				compPaddle.setY(compPaddle.yPos - 50);
 			}	
 		} else if (power.getColor() == Color.ORANGE) {
-			if(ballXSpeed > 0)
+			if(ballDirection == 1)
 				compPaddle.size /= 2;
 			else
 				paddle.size /= 2;
