@@ -1,6 +1,5 @@
 
 public class Game{
-	private int gamesWon = 0;
 	Player player1, player2;
 	private Ball ball;
 	
@@ -8,7 +7,6 @@ public class Game{
 		this.player1 = player1;
 		this.player2 = player2;
 		this.ball = new Ball(this);
-		
 	}
 	
 	public Game(){
@@ -17,14 +15,9 @@ public class Game{
 		this.ball.addListener(compPlayer);
 	}
 	
-	public void roundWon(){
-		gamesWon++;
-	}
-	
 	public Player getPlayer1() {
 		return player1;
 	}
-
 
 	public Player getPlayer2() {
 		return player2;

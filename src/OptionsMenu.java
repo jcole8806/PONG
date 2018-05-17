@@ -1,4 +1,3 @@
-//TODO Add Option to customize background / paddle color
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

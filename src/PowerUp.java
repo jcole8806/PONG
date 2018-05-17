@@ -1,14 +1,4 @@
-/*
- * How PowerUp fill work:
- * It will be a square the same size as the ball
- * It will have a color randomly chosen
- * The effect will depend on what color it is
- * It will appear every so often, and disappear soon after appearing
- * When the powerup is hit by the ball, the powerup will be applied to the player that hit it there
- * The powerup only lasts a small amount of time
- */
 
-//TODO Add effects for powerups
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
