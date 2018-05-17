@@ -81,6 +81,7 @@ public class OptionsMenu extends JPanel implements ActionListener{
 			buttons[1].setText("Max Score: " + maxScore);
 		} else if (e.getActionCommand().equals("Background Color")); {
 			try {
+				@SuppressWarnings("unchecked")
 				JComboBox<String> combo = (JComboBox<String>)e.getSource();
 				
 				if(combo.getSelectedItem().equals("Black"))

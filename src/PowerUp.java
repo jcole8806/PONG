@@ -29,10 +29,7 @@ public class PowerUp extends Rectangle implements ActionListener{
 	
 	public PowerUp() {
 		setRand();
-		//if(gameStart){
-			timer.start();
-		//}
-		
+		timer.start();
 	}
 	
 	public Color getColor() {
@@ -48,10 +45,8 @@ public class PowerUp extends Rectangle implements ActionListener{
 		if(OptionsMenu.powerUps && !MainGame.paused) {
 			int x = 50 + (int) (Math.random() * (Pong.screenSize.width - 390));
 			int y = 20 + (int) (Math.random() * (Pong.screenSize.height - 200));
-			if(i % 1000 == 0){
+			if(i % 1000 == 0)
 				this.setLocation(x,y);
-				System.out.println(x + "," + y);
-			}	
 			color = colors[rand.nextInt(colors.length)];
 		}
 	}
@@ -59,19 +54,6 @@ public class PowerUp extends Rectangle implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		i++;
 		setRand();
-		if(color != null){
-			if(color == Color.RED){
-				
-			}else if(color == Color.YELLOW){
-				
-			}else if(color == Color.BLUE){
-				
-			}else if(color == Color.GREEN){
-				
-			}
-		}
 	}
-	
-	
 
 }

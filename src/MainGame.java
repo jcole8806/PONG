@@ -7,12 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -23,25 +20,24 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private boolean paddleMoving = false, tangible = true, twoHumans, paddle2Moving = false, powerUpActive = false;
 	private Ball ball;
 	private Paddle paddle, compPaddle;
-	private HumanPlayer human;
-	private Player comp;
+	private Player human, comp;
 	private Game game;
 	private PowerUp power;
 	private Rectangle range = new Rectangle(0, 0, 0, 0);
-	private boolean playerHit = false;
 	public static boolean paused = false;
 	private Color currentPower;
+	private JButton exit = new JButton("Exit Game");
 	
 	public MainGame(boolean twoHumans) {
 		if(!twoHumans) {
 			game = new Game();
 			comp = (ComputerPlayer) game.getPlayer2();
 		} else {
-			game = new Game(new HumanPlayer(), new HumanPlayer());
-			comp = (HumanPlayer) game.getPlayer2();
+			game = new Game(new Player(), new Player());
+			comp = game.getPlayer2();
 		}
 		ball = game.getBall();
-		human = (HumanPlayer) game.getPlayer1();
+		human = game.getPlayer1();
 		human.initPaddle(Paddle.LEFT);
 		
 		comp.initPaddle(Paddle.RIGHT);
@@ -49,7 +45,13 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		compPaddle = comp.getPaddle();
 		this.twoHumans = twoHumans;
 		power = new PowerUp();
+
+		exit.setActionCommand(exit.getText());
+		exit.addActionListener(this);
+		exit.setVisible(false);
+		add(exit);
 		
+		setLayout(null);
 		setFocusable(true);
 		setSize(Pong.screenSize);
 		requestFocus();
@@ -73,9 +75,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
 		
-		if(paused)
+		if(paused) {
 			g.drawString("Game Paused", Pong.screenSize.width/2 - g.getFontMetrics().stringWidth("Game Paused")/2, Pong.screenSize.height/2);
-		
+			exit.setBounds(Pong.screenSize.width/2 - g.getFontMetrics().stringWidth("Game Paused")/2, Pong.screenSize.height/2,  g.getFontMetrics().stringWidth("Game Paused"), 40);
+			exit.setVisible(true);
+		}
 		power.paint(g);
 		
 		if(powerUpActive) {
@@ -147,6 +151,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			timer.stop();
 			paused = true;
 		} else {
+			exit.setVisible(false);
 			timer.start();
 			paused = false;
 		}
@@ -163,17 +168,6 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		
 	}
-	
-	/*private void playSound() {
-		   try {
-		    	  File soundFile = new File("audio/blip.wav");
-		    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);              
-		    	  Clip clip = AudioSystem.getClip();
-		    	  clip.open(audioIn);
-		    	  clip.start();
-		   } catch (Exception e) {}
-	}
-	*/
 	
 	private boolean powerUpHit() {
 		range = new Rectangle(power.x - ballXSpeed, power.y - Math.abs(ballYVelocity), 20 + ballXSpeed * 2, 20 + Math.abs(ballYVelocity)*2);
@@ -253,6 +247,11 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 
 	
 	public void actionPerformed(ActionEvent e) {
+		try {
+			if(e.getActionCommand().equals("Exit Game"))
+				System.exit(0);
+		} catch (Exception ex) {}
+		
 		if(paddleMoving && ((paddleDirection == -1 && paddle.yPos > 10) ||(paddleDirection == 1 && paddle.yPos < Pong.screenSize.height - 158)))
 			paddle.yPos = paddle.yPos + paddleSpeed*paddleDirection;
 		
@@ -284,6 +283,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		
 		if(powerUpHit())
 			powerUp();
+		
 	}
 		
 }
