@@ -17,7 +17,7 @@ public class Instruction extends JPanel implements ActionListener{
 	
 	public Instruction(final boolean twoPlayers) {
 		setLayout(null);
-		setBackground(Color.BLACK);
+		setBackground(OptionsMenu.bgColor);
 		//setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		//setSize(panelSize);
@@ -25,7 +25,7 @@ public class Instruction extends JPanel implements ActionListener{
 		JTextArea instructions = new JTextArea(	" Instructions: Use the W and S keys on the keyboard"
 				+ " to move your paddle. \n The objective of the game is to block the ball from passing off "
 				+ "the screen from your side, and instead trying to get the ball to pass off the screen "
-				+ " from the other side which would either be the second player or the computer player's side.");
+				+ " from the other side which would either be the second player or the computer player's side." + " Press P to pause the game.");
 		JLabel controls = new JLabel("Player 1 Controls: W and S");
 		//controls.setBounds(200, y, width, height);
 		JLabel controls2;

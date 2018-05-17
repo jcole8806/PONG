@@ -17,7 +17,7 @@ public class Winner extends JPanel implements ActionListener{
 		this.winnerNum = winnerNum;
 		this.twoHumans = twoHumans;
 		setLayout(null);
-		setBackground(Color.BLACK);
+		setBackground(OptionsMenu.bgColor);
 		setSize(Pong.screenSize);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		

@@ -1,5 +1,3 @@
-//TODO Have timer stop when point is scored and resume when space bar is pressed
-//TODO Move powerup stuff to PowerUp class
 
 import java.awt.Color;
 import java.awt.Font;
@@ -31,6 +29,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	private PowerUp power;
 	private Rectangle range = new Rectangle(0, 0, 0, 0);
 	private boolean playerHit = false;
+	public static boolean paused = false;
 	private Color currentPower;
 	
 	public MainGame(boolean twoHumans) {
@@ -55,7 +54,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		setSize(Pong.screenSize);
 		requestFocus();
 		addKeyListener(this);
-		setBackground(Color.BLACK);
+		setBackground(OptionsMenu.bgColor);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		timer.start();
 		
@@ -74,10 +73,12 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		g.drawString("" + player1Score, Pong.screenSize.width/4 - g.getFontMetrics().stringWidth("" + player1Score)/4, Pong.screenSize.height/10);
 		g.drawString("" + player2Score, (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth("" + player2Score)/2, Pong.screenSize.height/10);
 		
+		if(paused)
+			g.drawString("Game Paused", Pong.screenSize.width/2 - g.getFontMetrics().stringWidth("Game Paused")/2, Pong.screenSize.height/2);
+		
 		power.paint(g);
 		
 		if(powerUpActive) {
-			//Might put stuff for announcements here until that gets working
 			g.setColor(power.getColor());
 			g.setFont(new Font("Comic Sans", 1, 40));
 			if(powerPlayer == 1)
@@ -85,6 +86,8 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			else
 				g.drawString(powerString(), (Pong.screenSize.width*3)/4 - g.getFontMetrics().stringWidth(powerString())/2, 200);
 		}
+		
+		
 	}
 	
 	private String powerString() {
@@ -139,6 +142,15 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 			else if(e.getKeyCode() == 40)
 				paddle2Direction = 1;
 		}
+		
+		if(e.getKeyCode() == 80 && !paused) {
+			timer.stop();
+			paused = true;
+		} else {
+			timer.start();
+			paused = false;
+		}
+		
 	}
 
 	public void keyReleased(KeyEvent e) {

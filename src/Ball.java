@@ -6,8 +6,6 @@ import java.util.List;
 
 
 public class Ball {
-    //private static final int WIDTH = 30, HEIGHT = 30;
-    private Game game;
     int x;
 	int y;
 	int size;
@@ -18,7 +16,6 @@ public class Ball {
     public int ballXSpeed = 0, ballYVelocity = 0;
     
     public Ball(Game game) {
-        this.game = game;
         ballColor = Color.white;
         x = 800;
         y = 390;

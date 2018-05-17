@@ -1,7 +1,3 @@
-//TODO Make Announcements functional
-//TODO Scrap custom controls thing
-//TODO Have instructions based on number of human players
-//TODO Add option to toggle powerups on and off
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

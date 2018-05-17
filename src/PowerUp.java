@@ -45,7 +45,7 @@ public class PowerUp extends Rectangle implements ActionListener{
 	}
 	
 	public void setRand() {
-		if(OptionsMenu.powerUps) {
+		if(OptionsMenu.powerUps && !MainGame.paused) {
 			int x = 50 + (int) (Math.random() * (Pong.screenSize.width - 390));
 			int y = 20 + (int) (Math.random() * (Pong.screenSize.height - 200));
 			if(i % 1000 == 0){

@@ -19,7 +19,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	public MainMenu() {
 		setFocusable(true);
 		setLayout(null);
-		setBackground(Color.BLACK);
+		setBackground(OptionsMenu.bgColor);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE, 10));
 		Dimension panelSize = new Dimension(Pong.screenSize.width - 10, Pong.screenSize.height - 10);
 		setSize(panelSize);
