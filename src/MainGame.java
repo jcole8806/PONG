@@ -131,7 +131,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(twoHumans && (e.getKeyCode() == 38 || e.getKeyCode() == 40)) {
 			paddle2Moving = true;
 			if(ballXSpeed == 0) {
-				ballXSpeed = 5;
+				//ballXSpeed = 5;
 				tangible = true;
 			}
 			if(e.getKeyCode() == 38)
@@ -175,9 +175,9 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	private void gameOver() {
-		if(player1Score == 11)
+		if(player1Score == OptionsMenu.maxScore)
 			Pong.pongFrame.setContentPane(new Winner(1, twoHumans));
-		else if(player2Score == 11)
+		else if(player2Score == OptionsMenu.maxScore)
 			Pong.pongFrame.setContentPane(new Winner(2, twoHumans));
 		Pong.pongFrame.remove(this);
 		player1Score = 0;
@@ -267,7 +267,7 @@ public class MainGame extends JPanel implements ActionListener, KeyListener{
 		if(ball.x <= 0 || ball.x >= Pong.screenSize.width - 50)
 			pointScored();
 		
-		if(player1Score == 11 || player2Score == 11)
+		if(player1Score == OptionsMenu.maxScore || player2Score == OptionsMenu.maxScore)
 			gameOver();
 		
 		if(powerUpHit())

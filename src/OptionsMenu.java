@@ -1,4 +1,5 @@
 //TODO Add option to change control configuration
+//TODO Add Option to customize background / paddle color
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,8 +15,10 @@ import javax.swing.JPanel;
 public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 	private static final long serialVersionUID = 1L;
 	private int player1Up = 87, player1Down = 83, player2Up = 38, player2Down = 40;
-	private String[] buttonTexts = {"Set Player 1 Up", "Set Player 1 Down", "Set Player 2 Up", "Set Player 2 Down", "Go Back"};
+	private String[] buttonTexts = {"Power Ups: On", "Max Score: 11", "Up", "Down", "Go Back"};
 	private JButton[] buttons = new JButton[buttonTexts.length];
+	public static boolean powerUps = true;
+	public static int maxScore = 11;
 	
 	public OptionsMenu() {
 		setLayout(null);
@@ -30,8 +33,10 @@ public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 			add(buttons[i]);
 		}
 		
-		for(int i = 0; i < 4; i++)
-			buttons[i].setBounds(Pong.screenSize.width/2 - 200 + 200*(i/2), Pong.screenSize.height/2 + 50*(i%2), 200, 40);
+		buttons[0].setBounds(Pong.screenSize.width/2 - 200, Pong.screenSize.height/2, 400, 40);
+		buttons[1].setBounds(Pong.screenSize.width/2 - 200, Pong.screenSize.height/2 + 50, 200, 40);
+		buttons[2].setBounds(buttons[1].getX() + 200, Pong.screenSize.height/2 + 50, 100, 40);
+		buttons[3].setBounds(buttons[2].getX() + 100, Pong.screenSize.height/2 + 50, 100, 40);
 		
 		JButton back = new JButton("Go Back");
 		back.addActionListener(this);
@@ -66,6 +71,22 @@ public class OptionsMenu extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Go Back"))
 			Pong.pongFrame.setContentPane(new MainMenu());
+		else if(e.getActionCommand().equals("Power Ups: On")) {
+			powerUps = !powerUps;
+			if(powerUps)
+				buttons[0].setText("Power Ups: On");
+			else
+				buttons[0].setText("Power Ups: Off");
+		} else if(e.getActionCommand().equals("Up")) {
+			if(maxScore < 99)
+				maxScore ++;
+			buttons[1].setText("Max Score: " + maxScore);
+		} else if(e.getActionCommand().equals("Down")) {
+			if(maxScore > 1)
+				maxScore--;
+			buttons[1].setText("Max Score: " + maxScore);
+		}
+			
 		
 	}
 
