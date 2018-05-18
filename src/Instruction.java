@@ -31,12 +31,12 @@ public class Instruction extends JPanel implements ActionListener{
 		instructions.setLineWrap(true);
 		instructions.setFont(instructions.getFont().deriveFont(25.0f));
 		instructions.setForeground(Color.WHITE);
-		instructions.setBackground(Color.BLACK);
+		instructions.setBackground(OptionsMenu.bgColor);
 		
 		
 		add(instructions, BorderLayout.NORTH);
 		JPanel buttons = new JPanel();
-		buttons.setBackground(Color.BLACK);
+		buttons.setBackground(OptionsMenu.bgColor);
 		
 		JButton back = new JButton("Go Back");
 		
